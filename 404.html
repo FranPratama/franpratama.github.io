@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Desynchronized | Fran Pratama</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#a4161a">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=EB+Garamond:ital@1&family=Share+Tech+Mono&display=swap">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <style>
+    body {
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      min-height: 100svh;
+      padding: 32px 16px;
+      overflow: hidden;
+      background:
+        repeating-linear-gradient(0deg, rgba(207, 232, 255, 0.04) 0 1px, transparent 1px 3px),
+        radial-gradient(ellipse at center, #1a0608 0%, var(--ink) 70%);
+      text-align: center;
+    }
+
+    .desync {
+      display: grid;
+      justify-items: center;
+      gap: 22px;
+      max-width: 900px;
+    }
+
+    .desync__code {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.4em;
+      color: var(--animus);
+      opacity: 0.7;
+    }
+
+    .desync__title {
+      position: relative;
+      font-size: clamp(1.6rem, 0.4rem + 5.2vw, 4.2rem);
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      color: var(--bone);
+    }
+
+    .desync__title::before,
+    .desync__title::after {
+      content: attr(data-text);
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .desync__title::before {
+      color: var(--blood-bright);
+      animation: slice-a 2.4s steps(1) infinite;
+    }
+
+    .desync__title::after {
+      color: #00c8ff;
+      animation: slice-b 2.4s steps(1) infinite;
+    }
+
+    @keyframes slice-a {
+      0%, 100% { clip-path: inset(0 0 100% 0); transform: none; }
+      10% { clip-path: inset(10% 0 60% 0); transform: translateX(-6px); }
+      14% { clip-path: inset(50% 0 20% 0); transform: translateX(5px); }
+      18% { clip-path: inset(0 0 100% 0); }
+      62% { clip-path: inset(70% 0 5% 0); transform: translateX(-4px); }
+      66% { clip-path: inset(0 0 100% 0); }
+    }
+
+    @keyframes slice-b {
+      0%, 100% { clip-path: inset(0 0 100% 0); transform: none; }
+      11% { clip-path: inset(35% 0 40% 0); transform: translateX(6px); }
+      15% { clip-path: inset(5% 0 80% 0); transform: translateX(-5px); }
+      19% { clip-path: inset(0 0 100% 0); }
+      63% { clip-path: inset(20% 0 55% 0); transform: translateX(4px); }
+      67% { clip-path: inset(0 0 100% 0); }
+    }
+
+    .desync__text {
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--bone-dim);
+    }
+
+    .desync__bar {
+      width: min(320px, 80%);
+      height: 2px;
+      background: linear-gradient(90deg, var(--blood-bright) 0 18%, rgba(232, 226, 214, 0.1) 18%);
+    }
+  </style>
+</head>
+<body>
+  <main class="desync">
+    <p class="desync__code">ERROR 404 // SYNC 018%</p>
+    <h1 class="desync__title" data-text="DESYNCHRONIZED">DESYNCHRONIZED</h1>
+    <div class="desync__bar" aria-hidden="true"></div>
+    <p class="desync__text" data-en="Memory corrupted. You have desynchronized." data-id="Memori rusak. Kamu mengalami desinkronisasi.">Memory corrupted. You have desynchronized.</p>
+    <a class="btn btn--blood" href="/" data-en="Return to Animus" data-id="Kembali ke Animus">Return to Animus</a>
+  </main>
+  <script>
+    (() => {
+      let lang = "en";
+      try {
+        lang = localStorage.getItem("animus-lang") || ((navigator.language || "").toLowerCase().startsWith("id") ? "id" : "en");
+      } catch {}
+      document.documentElement.lang = lang;
+      document.querySelectorAll("[data-" + lang + "]").forEach((el) => {
+        el.textContent = el.getAttribute("data-" + lang);
+      });
+    })();
+  </script>
+</body>
+</html>

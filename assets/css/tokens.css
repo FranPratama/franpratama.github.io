@@ -1,0 +1,63 @@
+:root {
+  color-scheme: dark;
+
+  --ink: #0b0b0c;
+  --ash: #151517;
+  --ash-2: #1f1f23;
+  --line: rgba(232, 226, 214, 0.12);
+  --bone: #e8e2d6;
+  --bone-dim: #b3ab9d;
+  --parchment: #d9cbb0;
+  --parchment-dark: #b19c77;
+  --sepia-ink: #2b1d12;
+  --sepia-ink-dim: #5a4631;
+  --blood: #a4161a;
+  --blood-bright: #c1121f;
+  --blood-deep: #4a0a0d;
+  --gold: #b08d57;
+  --gold-bright: #d8b477;
+  --animus: #cfe8ff;
+  --animus-dim: rgba(207, 232, 255, 0.35);
+  --sky-top: #0b0b0c;
+  --sky-mid: #2a0709;
+  --sky-low: #5c1012;
+  --sun: #e0703a;
+
+  --font-display: "Cinzel", "Trajan Pro", Georgia, serif;
+  --font-body: "EB Garamond", Georgia, "Times New Roman", serif;
+  --font-mono: "Share Tech Mono", ui-monospace, Consolas, monospace;
+
+  --container: 1180px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --section-space: clamp(88px, 9vw, 120px);
+  --nav-h: 68px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.18, 1);
+
+  --z-bg: 0;
+  --z-content: 2;
+  --z-overlay: 40;
+  --z-nav: 50;
+  --z-menu: 60;
+  --z-modal: 80;
+  --z-cursor: 90;
+  --z-loader: 100;
+}
+
+.eagle-vision {
+  --bone: #c9d6e6;
+  --bone-dim: #7f8fa3;
+  --line: rgba(160, 190, 230, 0.16);
+  --ash: #0e141c;
+  --ash-2: #16202b;
+  --ink: #06090d;
+  --parchment: #3a4757;
+  --parchment-dark: #2a3542;
+  --sepia-ink: #d5e2f2;
+  --sepia-ink-dim: #93a4b8;
+  --sky-top: #05080c;
+  --sky-mid: #0c1622;
+  --sky-low: #1a2a3c;
+  --sun: #6b8fb8;
+}

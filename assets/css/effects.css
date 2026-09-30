@@ -1,0 +1,269 @@
+.glitch-line {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 50%;
+  z-index: var(--z-overlay);
+  height: 3px;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(90deg, transparent, var(--animus) 20%, #fff 50%, var(--animus) 80%, transparent);
+  box-shadow: 0 0 14px var(--animus), 0 3px 0 rgba(193, 18, 31, 0.6), 0 -3px 0 rgba(0, 200, 255, 0.4);
+}
+
+.glitch-line.is-active {
+  animation: glitch-sweep 0.55s steps(6) 1;
+}
+
+@keyframes glitch-sweep {
+  0% { opacity: 0; transform: translateY(-30vh) scaleX(0.3); }
+  20% { opacity: 0.9; transform: translateY(-12vh) scaleX(1); }
+  40% { opacity: 0.4; transform: translateY(4vh) scaleX(0.7); }
+  60% { opacity: 0.8; transform: translateY(14vh) scaleX(1); }
+  100% { opacity: 0; transform: translateY(30vh) scaleX(0.2); }
+}
+
+.is-scrambling {
+  color: var(--animus);
+  text-shadow: 0 0 10px rgba(207, 232, 255, 0.5);
+}
+
+.hero__name-last.is-scrambling {
+  text-shadow: none;
+}
+
+.cursor {
+  display: none;
+}
+
+.has-cursor .cursor {
+  display: block;
+}
+
+.has-cursor,
+.has-cursor a,
+.has-cursor button,
+.has-cursor .contract__paper {
+  cursor: none;
+}
+
+.has-cursor input,
+.has-cursor textarea {
+  cursor: text;
+}
+
+.cursor__dot,
+.cursor__ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-cursor);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.cursor__dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  background: var(--blood-bright);
+  transform: translate3d(var(--x, -100px), var(--y, -100px), 0) rotate(45deg);
+}
+
+.cursor__ring {
+  width: 36px;
+  height: 36px;
+  margin: -18px 0 0 -18px;
+  transform: translate3d(var(--rx, -100px), var(--ry, -100px), 0);
+}
+
+.cursor__ring::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(232, 226, 214, 0.55);
+  transform: rotate(45deg) scale(var(--ring-scale, 1));
+  transition: transform 0.35s var(--ease-out), border-color 0.35s, background 0.35s;
+}
+
+.cursor.is-hovering .cursor__ring {
+  --ring-scale: 1.6;
+}
+
+.cursor.is-hovering .cursor__ring::before {
+  border-color: var(--gold-bright);
+  background: rgba(216, 180, 119, 0.08);
+}
+
+.cursor.is-pressed .cursor__ring {
+  --ring-scale: 0.7;
+}
+
+.cursor.is-hidden {
+  opacity: 0;
+}
+
+.eagle-vision [data-target] {
+  color: var(--gold-bright);
+  text-shadow: 0 0 12px rgba(216, 180, 119, 0.8);
+  animation: target-pulse 1.8s ease-in-out infinite;
+}
+
+.eagle-vision .btn[data-target] {
+  background: rgba(216, 180, 119, 0.18);
+  color: var(--gold-bright);
+}
+
+.eagle-vision .btn--ghost[data-target]::before {
+  background: var(--ink);
+}
+
+.eagle-vision .social[data-target]::before {
+  border-color: var(--gold-bright);
+  box-shadow: 0 0 14px rgba(216, 180, 119, 0.6);
+}
+
+@keyframes target-pulse {
+  0%, 100% { filter: drop-shadow(0 0 2px rgba(216, 180, 119, 0.4)); }
+  50% { filter: drop-shadow(0 0 12px rgba(216, 180, 119, 0.95)); }
+}
+
+.eagle-vision img:not(.hero__layer) {
+  filter: grayscale(1) brightness(0.75) sepia(0.3) hue-rotate(170deg) saturate(1.8);
+}
+
+.eagle-vision .contract__seal {
+  background: radial-gradient(circle at 35% 30%, #f0d49a, var(--gold) 60%, #6d5330);
+}
+
+.eagle-vision .contract__open,
+.eagle-vision .contract__link {
+  color: var(--gold-bright);
+}
+
+.ev-transition,
+.ev-transition *,
+.ev-transition *::before,
+.ev-transition *::after {
+  transition: color 0.7s, background-color 0.7s, border-color 0.7s, background 0.7s, filter 0.7s !important;
+}
+
+.ev-ripple {
+  position: fixed;
+  z-index: var(--z-overlay);
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border-radius: 50%;
+  pointer-events: none;
+  border: 2px solid var(--gold-bright);
+  box-shadow: 0 0 30px rgba(216, 180, 119, 0.6), inset 0 0 30px rgba(207, 232, 255, 0.3);
+  animation: ev-ripple 1.1s var(--ease-out) forwards;
+}
+
+.ev-ripple--off {
+  border-color: var(--blood-bright);
+  box-shadow: 0 0 30px rgba(193, 18, 31, 0.5);
+}
+
+@keyframes ev-ripple {
+  from { transform: scale(0); opacity: 1; }
+  to { transform: scale(80); opacity: 0; }
+}
+
+.leap-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  pointer-events: none;
+  opacity: 0;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 22px, rgba(232, 226, 214, 0.12) 22px 23px, transparent 23px 61px, rgba(232, 226, 214, 0.08) 61px 62px),
+    linear-gradient(transparent, rgba(11, 11, 12, 0.6));
+  background-size: 100% 100%, 100% 100%;
+}
+
+.leap-overlay.is-active {
+  animation: leap-streak 1s var(--ease-in-out) forwards;
+}
+
+@keyframes leap-streak {
+  0% { opacity: 0; transform: scaleY(1); }
+  25% { opacity: 1; transform: scaleY(3); }
+  75% { opacity: 1; transform: scaleY(3); }
+  100% { opacity: 0; transform: scaleY(1); }
+}
+
+.dive-eagle {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-overlay);
+  width: 140px;
+  color: var(--bone);
+  pointer-events: none;
+  filter: drop-shadow(0 0 20px rgba(207, 232, 255, 0.5));
+}
+
+.leap-banner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: var(--z-overlay);
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 5rem);
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  white-space: nowrap;
+  color: var(--bone);
+  text-shadow: 4px 0 rgba(193, 18, 31, 0.8), -4px 0 rgba(0, 200, 255, 0.5);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  animation: banner 1.8s var(--ease-out) forwards;
+}
+
+@keyframes banner {
+  0% { opacity: 0; letter-spacing: 0.8em; }
+  25% { opacity: 1; letter-spacing: 0.2em; }
+  75% { opacity: 1; }
+  100% { opacity: 0; letter-spacing: 0.1em; }
+}
+
+.eagle-svg .eagle-svg__wing {
+  transform-box: view-box;
+  transform-origin: 58px 29px;
+  animation: flap 0.5s ease-in-out infinite alternate;
+}
+
+.eagle-svg .eagle-svg__wing--far {
+  opacity: 0.75;
+  animation-delay: -0.08s;
+}
+
+.eagle-svg.is-gliding .eagle-svg__wing {
+  animation-duration: 1.6s;
+}
+
+@keyframes flap {
+  from { transform: scaleY(1) rotate(0deg); }
+  to { transform: scaleY(-0.55) rotate(-6deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eagle-vision [data-target] {
+    animation: none;
+    filter: drop-shadow(0 0 6px rgba(216, 180, 119, 0.8));
+  }
+}
+
+.has-cursor:has(dialog[open]) {
+  cursor: auto;
+}
+
+.has-cursor:has(dialog[open]) .cursor {
+  display: none;
+}
+
+.has-cursor:has(dialog[open]) dialog :is(a, button) {
+  cursor: pointer;
+}

@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fran Pratama | Portfolio</title>
+  <meta name="description" content="Portfolio of Fran Pratama (Ficho Pranandasya Andrian Pratama), fullstack developer and DevOps from Malang, Indonesia.">
+  <meta name="theme-color" content="#a4161a">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://franpratama.github.io/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://franpratama.github.io/">
+  <meta property="og:title" content="Fran Pratama | Portfolio">
+  <meta property="og:description" content="Fullstack developer &amp; DevOps from Malang. Nothing is true, everything is permitted.">
+  <meta property="og:image" content="https://franpratama.github.io/assets/img/og-cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Fran Pratama | Portfolio">
+  <meta name="twitter:description" content="Fullstack developer &amp; DevOps from Malang. Nothing is true, everything is permitted.">
+  <meta name="twitter:image" content="https://franpratama.github.io/assets/img/og-cover.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Share+Tech+Mono&display=swap">
+
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/loader.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/effects.css">
+
+  <script>document.documentElement.classList.replace("no-js", "js");</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="assets/js/main.js" type="module"></script>
+</head>
+<body>
+  <svg class="svg-defs" aria-hidden="true" focusable="false">
+    <filter id="text-outline">
+      <feMorphology in="SourceGraphic" operator="dilate" radius="2" result="thick"/>
+      <feComposite in="thick" in2="SourceGraphic" operator="out"/>
+    </filter>
+    <filter id="text-outline-thin">
+      <feMorphology in="SourceGraphic" operator="dilate" radius="1.2" result="thick"/>
+      <feComposite in="thick" in2="SourceGraphic" operator="out"/>
+    </filter>
+  </svg>
+  <a class="skip-link" href="#origins" data-i18n="ui.skipLink">Skip to content</a>
+
+  <div id="loader" class="loader">
+    <div class="loader__grid" aria-hidden="true"></div>
+    <div class="loader__scan" aria-hidden="true"></div>
+    <p class="loader__corner loader__corner--tl" aria-hidden="true" data-loader-text="loader.version"></p>
+    <p class="loader__corner loader__corner--tr" aria-hidden="true" data-loader-text="loader.subject"></p>
+    <div class="loader__stage">
+      <div class="loader__emblem" aria-hidden="true">
+        <svg class="loader__helix" viewBox="0 0 400 160"></svg>
+        <svg class="loader__insignia" viewBox="0 0 100 100"></svg>
+      </div>
+      <div class="loader__readout" aria-hidden="true">
+        <p class="loader__title"></p>
+        <p class="loader__percent"><span data-percent>000</span><small>%</small></p>
+        <div class="loader__bar"><span></span></div>
+        <p class="loader__status"></p>
+      </div>
+    </div>
+    <p class="sr-only" role="status" data-announce></p>
+    <button class="loader__skip" type="button"></button>
+    <div class="loader__flash" aria-hidden="true"></div>
+  </div>
+
+  <div class="noise" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="glitch-line" aria-hidden="true"></div>
+  <div class="leap-overlay" aria-hidden="true"></div>
+  <div class="toast" role="status" aria-live="polite"></div>
+  <div class="cursor" aria-hidden="true">
+    <span class="cursor__ring"></span>
+    <span class="cursor__dot"></span>
+  </div>
+
+  <header class="nav" data-app>
+    <div class="nav__inner container">
+      <a class="nav__brand" href="#hero" data-i18n-attr="aria-label:ui.brand">
+        <span data-insignia="nav__insignia"></span>
+        <span class="nav__name" data-brand-name></span>
+      </a>
+      <nav class="nav__menu" id="nav-menu" aria-label="Memory sequences">
+        <ol class="nav__list">
+          <li><a class="nav__link" href="#origins" data-nav><span class="nav__num">01</span><span data-i18n="nav.origins"></span></a></li>
+          <li><a class="nav__link" href="#arsenal" data-nav><span class="nav__num">02</span><span data-i18n="nav.arsenal"></span></a></li>
+          <li><a class="nav__link" href="#contracts" data-nav><span class="nav__num">03</span><span data-i18n="nav.contracts"></span></a></li>
+          <li><a class="nav__link" href="#codex" data-nav><span class="nav__num">04</span><span data-i18n="nav.codex"></span></a></li>
+          <li><a class="nav__link" href="#brotherhood" data-nav><span class="nav__num">05</span><span data-i18n="nav.brotherhood"></span></a></li>
+        </ol>
+      </nav>
+      <div class="nav__tools">
+        <button class="icon-btn eagle-btn" type="button" aria-pressed="false" data-icon="eye" data-i18n-attr="aria-label:ui.eagle;title:ui.eagle"></button>
+        <button class="lang-btn" type="button" data-i18n-attr="aria-label:ui.lang">
+          <span data-lang="en">EN</span><span aria-hidden="true">/</span><span data-lang="id">ID</span>
+        </button>
+        <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu" data-i18n-attr="aria-label:ui.menu">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="sync-meter" aria-hidden="true"><span class="sync-meter__fill"></span></div>
+  </header>
+
+  <div class="hud-sync" aria-hidden="true">
+    <svg class="hud-sync__dna" viewBox="0 0 14 28" fill="none" stroke="currentColor" stroke-width="1.2">
+      <path d="M2 1c0 6 10 7 10 13S2 21 2 27M12 1c0 6-10 7-10 13s10 7 10 13"/>
+      <path d="M4 5h6M4 23h6M3 14h8" opacity=".6"/>
+    </svg>
+    <span data-i18n="ui.sync"></span>
+    <span class="hud-sync__value">000%</span>
+  </div>
+
+  <main id="main" data-app>
+    <section id="hero" class="hero" aria-labelledby="hero-title">
+      <div class="hero__sun" aria-hidden="true"></div>
+      <img class="hero__layer hero__layer--far" src="assets/svg/skyline-far.svg" alt="" data-depth="0.45" data-sway="12">
+      <div class="hero__eagle" aria-hidden="true"></div>
+      <div class="hero__fog hero__fog--back" aria-hidden="true"></div>
+      <img class="hero__layer hero__layer--mid" src="assets/svg/skyline-mid.svg" alt="" data-depth="0.28" data-sway="26">
+      <div class="hero__fog hero__fog--front" aria-hidden="true"></div>
+      <img class="hero__layer hero__layer--near" src="assets/svg/skyline-near.svg" alt="" data-depth="0.1" data-sway="44">
+      <canvas class="hero__dust" aria-hidden="true"></canvas>
+
+      <div class="hero__content container">
+        <p class="hud-label" data-hero-in data-i18n="hero.tag"></p>
+        <h1 id="hero-title" class="hero__name">
+          <span class="hero__name-first" data-name-first data-scramble></span>
+          <span class="hero__name-last" data-name-last data-scramble></span>
+        </h1>
+        <p class="hero__role" data-hero-in data-i18n="hero.role"></p>
+        <blockquote class="hero__creed" data-hero-in>
+          <p data-i18n="hero.creed"></p>
+          <cite data-i18n="hero.creedCite"></cite>
+        </blockquote>
+        <p class="hero__intro" data-hero-in data-i18n="hero.intro"></p>
+        <div class="hero__actions" data-hero-in>
+          <a class="btn btn--blood" href="#origins" data-leap data-target data-icon="arrowDown"><span data-i18n="hero.leap"></span></a>
+          <a class="btn btn--ghost" href="#" data-cv data-target data-icon="download"><span data-i18n="hero.cv"></span></a>
+        </div>
+      </div>
+
+      <a class="scroll-blade" href="#origins" data-leap aria-hidden="true" tabindex="-1">
+        <span class="scroll-blade__sheath"></span>
+        <span data-i18n="hero.scroll"></span>
+      </a>
+    </section>
+
+    <section id="origins" class="section" aria-labelledby="origins-title">
+      <div class="container">
+        <header class="section__head">
+          <p class="hud-label">Sequence 01 // <span data-i18n="nav.origins"></span></p>
+          <h2 id="origins-title" class="section__title" data-i18n="origins.title" data-scramble></h2>
+          <div class="ornament" aria-hidden="true"></div>
+          <p class="section__intro" data-i18n="origins.intro"></p>
+        </header>
+        <div class="origins">
+          <figure class="portrait frame" data-reveal>
+            <div class="portrait__media">
+              <img src="assets/img/profile.jpg" alt="" width="720" height="720" loading="lazy" data-i18n-attr="alt:origins.photoAlt">
+              <span class="portrait__rgb portrait__rgb--r" aria-hidden="true"></span>
+              <span class="portrait__rgb portrait__rgb--b" aria-hidden="true"></span>
+            </div>
+            <figcaption class="portrait__caption">
+              <span data-i18n="origins.caption"></span>
+              <span data-photo-date></span>
+            </figcaption>
+          </figure>
+          <div class="origins__body">
+            <p class="origins__lead" data-reveal data-i18n="origins.lead"></p>
+            <p data-reveal data-i18n="origins.p1"></p>
+            <p data-reveal data-i18n="origins.p2"></p>
+            <dl class="stats" id="stats"></dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="arsenal" class="section" aria-labelledby="arsenal-title">
+      <div class="container">
+        <header class="section__head">
+          <p class="hud-label">Sequence 02 // <span data-i18n="nav.arsenal"></span></p>
+          <h2 id="arsenal-title" class="section__title" data-i18n="arsenal.title" data-scramble></h2>
+          <div class="ornament" aria-hidden="true"></div>
+          <p class="section__intro" data-i18n="arsenal.intro"></p>
+        </header>
+        <div class="arsenal" id="arsenal-grid"></div>
+      </div>
+    </section>
+
+    <section id="contracts" class="section" aria-labelledby="contracts-title">
+      <div class="container">
+        <header class="section__head">
+          <p class="hud-label">Sequence 03 // <span data-i18n="nav.contracts"></span></p>
+          <h2 id="contracts-title" class="section__title" data-i18n="contracts.title" data-scramble></h2>
+          <div class="ornament" aria-hidden="true"></div>
+          <p class="section__intro" data-i18n="contracts.intro"></p>
+        </header>
+        <div class="filters" id="contract-filters" role="group" aria-label="Filter"></div>
+        <div class="contracts" id="contracts-grid"></div>
+      </div>
+    </section>
+
+    <section id="codex" class="section" aria-labelledby="codex-title">
+      <div class="container">
+        <header class="section__head">
+          <p class="hud-label">Sequence 04 // <span data-i18n="nav.codex"></span></p>
+          <h2 id="codex-title" class="section__title" data-i18n="codex.title" data-scramble></h2>
+          <div class="ornament" aria-hidden="true"></div>
+          <p class="section__intro" data-i18n="codex.intro"></p>
+        </header>
+        <ol class="codex" id="codex-list"></ol>
+      </div>
+    </section>
+
+    <section id="brotherhood" class="section" aria-labelledby="brotherhood-title">
+      <div class="container">
+        <header class="section__head">
+          <p class="hud-label">Sequence 05 // <span data-i18n="nav.brotherhood"></span></p>
+          <h2 id="brotherhood-title" class="section__title" data-i18n="brotherhood.title" data-scramble></h2>
+          <div class="ornament" aria-hidden="true"></div>
+          <p class="section__intro" data-i18n="brotherhood.intro"></p>
+        </header>
+        <div class="brotherhood">
+          <form class="raven" id="contact-form" novalidate data-reveal>
+            <label class="field">
+              <span class="field__label" data-i18n="brotherhood.form.name"></span>
+              <input type="text" name="name" autocomplete="name" required data-i18n-attr="placeholder:brotherhood.form.namePh">
+            </label>
+            <label class="field">
+              <span class="field__label" data-i18n="brotherhood.form.email"></span>
+              <input type="email" name="email" autocomplete="email" required data-i18n-attr="placeholder:brotherhood.form.emailPh">
+            </label>
+            <label class="field">
+              <span class="field__label" data-i18n="brotherhood.form.message"></span>
+              <textarea name="message" rows="5" required data-i18n-attr="placeholder:brotherhood.form.messagePh"></textarea>
+            </label>
+            <div class="raven__footer">
+              <button class="btn btn--blood" type="submit" data-target><span data-i18n="brotherhood.form.send"></span></button>
+              <p class="raven__status" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+          <aside class="brotherhood__aside" data-reveal>
+            <h3 data-i18n="brotherhood.asideTitle"></h3>
+            <p data-i18n="brotherhood.asideText"></p>
+            <ul class="socials" id="socials"></ul>
+            <a class="brotherhood__mail" href="#" data-email data-target></a>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" data-app>
+    <div class="footer__inner container">
+      <span data-insignia="footer__insignia"></span>
+      <p class="footer__rip" data-i18n="footer.rip"></p>
+      <p class="footer__meta">&copy; <span data-year></span> <span data-brand-name></span>. <span data-i18n="footer.rights"></span></p>
+      <p class="footer__disclaimer" data-i18n="footer.disclaimer"></p>
+      <a class="footer__top" href="#hero" data-icon="arrowUp"><span data-i18n="footer.top"></span></a>
+    </div>
+  </footer>
+
+  <dialog class="dossier" id="dossier" aria-labelledby="dossier-title">
+    <div class="dossier__inner">
+      <button class="icon-btn dossier__close" type="button" data-close data-icon="close" data-i18n-attr="aria-label:ui.close"></button>
+      <p class="hud-label" data-dossier-label></p>
+      <h3 id="dossier-title" class="dossier__title"></h3>
+      <p class="dossier__meta"></p>
+      <p class="dossier__body"></p>
+      <ul class="contract__tags"></ul>
+      <div class="dossier__actions"></div>
+    </div>
+  </dialog>
+
+  <noscript><p class="noscript">This memory requires JavaScript to synchronize.</p></noscript>
+</body>
+</html>
