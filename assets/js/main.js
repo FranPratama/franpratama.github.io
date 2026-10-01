@@ -1,13 +1,18 @@
 import { initLang, applyTranslations, onLangChange } from "./i18n.js";
-import { renderAll, resolveLogo } from "./render.js";
+import { renderAll, resolveLogo, resolveEagle } from "./render.js";
 import { runLoader } from "./loader.js";
 import { initBackground } from "./background.js";
 import { initEagleVision } from "./eagle-vision.js";
 import * as fx from "./effects.js";
 import * as ui from "./ui.js";
+import { prefersReducedMotion } from "./scramble.js";
+
+const toTop = () => window.scrollTo({ top: 0, behavior: "instant" });
+
+toTop();
 
 initLang();
-await resolveLogo();
+await Promise.all([resolveLogo(), resolveEagle()]);
 renderAll();
 applyTranslations();
 
@@ -24,10 +29,18 @@ fx.initEasterEgg();
 fx.initLeapButton();
 fx.initPortraitGlitch();
 fx.initSectionTracking(nav.setActive);
-initBackground();
+const background = initBackground();
 fx.prepareHeroIntro(motion);
 
 await runLoader();
+
+const anchorTarget = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+if (anchorTarget) {
+  toTop();
+  anchorTarget.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth" });
+}
+
+background?.startEagle();
 
 fx.playHeroIntro(motion);
 fx.initReveals(motion);

@@ -5,6 +5,18 @@ export const site = {
   logo: {
     src: "assets/img/logo.svg",
   },
+  eagle: {
+    src: "assets/img/eagle.svg",
+    rig: {
+      far: { clip: "-20,-20 160,-20 176,194 112,250 -20,250", pivot: [146, 222] },
+      near: { clip: "172,190 200,-20 380,-20 380,268 250,262", pivot: [206, 226] },
+      body: { clip: "-20,226 92,226 168,182 262,242 380,250 380,380 -20,380" },
+      joints: [
+        [146, 222, 30],
+        [206, 226, 28],
+      ],
+    },
+  },
   photo: {
     src: "assets/img/profile.jpg",
     legacy: true,
@@ -155,11 +167,10 @@ export const site = {
   ],
   codex: [
     { id: "t1", type: "work", start: 2025, end: null },
-    { id: "t2", type: "work", start: 2023, end: 2023 },
-    { id: "t3", type: "work", start: 2023, end: 2025 },
-    { id: "t4", type: "edu", start: 2021, end: 2025 },
-    { id: "t5", type: "work", start: 2017, end: 2017 },
-    { id: "t6", type: "edu", start: 2016, end: 2019 },
+    { id: "t2", type: "work", start: 2023, end: 2025 },
+    { id: "t3", type: "edu", start: 2021, end: 2025 },
+    { id: "t4", type: "work", start: 2017, end: 2017 },
+    { id: "t5", type: "edu", start: 2016, end: 2019 },
   ],
 };
 
@@ -188,6 +199,7 @@ export const strings = {
       sync: "Sync",
       close: "Close",
       brand: "Back to top",
+      consoleHint: "Curious, are we? Type \"leap\" anywhere on the page.",
     },
     nav: {
       origins: "Origins",
@@ -300,11 +312,10 @@ export const strings = {
       types: { work: "Mission", edu: "Training" },
       items: {
         t1: { role: "DevOps Engineer", place: "Institut Teknologi & Bisnis Asia, Malang", desc: "Building and running the infrastructure behind the campus academic system: Google Cloud Build pipelines for more than twenty services, IAP-based deployment, production configuration, and keeping the servers healthy when something breaks at the worst possible time." },
-        t2: { role: "Full Stack Developer", place: "Institut Teknologi & Bisnis Asia, Malang", desc: "Built features across the frontend and backend of campus web applications." },
-        t3: { role: "Laboratory Assistant", place: "Institut Teknologi & Bisnis Asia, Malang", desc: "Assisted practicum sessions and kept the computer labs running for students." },
-        t4: { role: "Bachelor of Computer Science", place: "Institut Teknologi & Bisnis Asia, Malang", desc: "Thesis on a hybrid CNN-LSTM intrusion detection system, published in the Jurasik journal." },
-        t5: { role: "IT Support Technician", place: "CV Agrindo Cipta Mandiri (situsMESIN), Malang", desc: "Hardware, network, and day-to-day user support." },
-        t6: { role: "Software Engineering", place: "SMK Negeri 5 Malang", desc: "Vocational high school, where the first lines of code were written." },
+        t2: { role: "Laboratory Assistant", place: "Institut Teknologi & Bisnis Asia, Malang", desc: "Assisted practicum sessions and kept the computer labs running for students." },
+        t3: { role: "Bachelor of Computer Science", place: "Institut Teknologi & Bisnis Asia, Malang", desc: "Thesis on a hybrid CNN-LSTM intrusion detection system, published in the Jurasik journal." },
+        t4: { role: "IT Support Technician", place: "CV Agrindo Cipta Mandiri (situsMESIN), Malang", desc: "Hardware, network, and day-to-day user support." },
+        t5: { role: "Software Engineering", place: "SMK Negeri 5 Malang", desc: "Vocational high school, where the first lines of code were written." },
       },
     },
     brotherhood: {
@@ -331,7 +342,14 @@ export const strings = {
       rip: "Requiescat in pace",
       rights: "All rights reserved.",
       disclaimer: "A fan-inspired theme. Not affiliated with or endorsed by Ubisoft.",
+      creditFrom: "Logo icon from",
+      creditBy: "by",
+      creditChanges: ". Stroke and color modified.",
+      eagleFrom: "Eagle silhouette from",
+      eagleChanges: ". Split into animated wings.",
       top: "Back to the rooftops",
+      hintBefore: "Psst. Type",
+      hintAfter: "anywhere on the page.",
     },
   },
   id: {
@@ -358,6 +376,7 @@ export const strings = {
       sync: "Sinkron",
       close: "Tutup",
       brand: "Kembali ke atas",
+      consoleHint: "Penasaran, ya? Ketik \"leap\" di mana saja di halaman ini.",
     },
     nav: {
       origins: "Asal-Usul",
@@ -470,11 +489,10 @@ export const strings = {
       types: { work: "Misi", edu: "Pelatihan" },
       items: {
         t1: { role: "DevOps Engineer", place: "Institut Teknologi & Bisnis Asia, Malang", desc: "Membangun dan menjalankan infrastruktur di balik sistem akademik kampus: pipeline Google Cloud Build untuk lebih dari dua puluh layanan, deployment lewat IAP, konfigurasi production, dan menjaga server tetap sehat saat ada yang rusak di waktu paling tidak tepat." },
-        t2: { role: "Full Stack Developer", place: "Institut Teknologi & Bisnis Asia, Malang", desc: "Membangun fitur di sisi frontend dan backend aplikasi web kampus." },
-        t3: { role: "Asisten Laboratorium", place: "Institut Teknologi & Bisnis Asia, Malang", desc: "Mendampingi sesi praktikum dan menjaga laboratorium komputer tetap siap dipakai mahasiswa." },
-        t4: { role: "S1 Ilmu Komputer", place: "Institut Teknologi & Bisnis Asia, Malang", desc: "Skripsi tentang sistem deteksi intrusi hybrid CNN-LSTM, terbit di jurnal Jurasik." },
-        t5: { role: "IT Support Technician", place: "CV Agrindo Cipta Mandiri (situsMESIN), Malang", desc: "Dukungan perangkat keras, jaringan, dan kebutuhan IT harian pengguna." },
-        t6: { role: "Rekayasa Perangkat Lunak", place: "SMK Negeri 5 Malang", desc: "Sekolah menengah kejuruan, tempat baris kode pertama ditulis." },
+        t2: { role: "Asisten Laboratorium", place: "Institut Teknologi & Bisnis Asia, Malang", desc: "Mendampingi sesi praktikum dan menjaga laboratorium komputer tetap siap dipakai mahasiswa." },
+        t3: { role: "S1 Ilmu Komputer", place: "Institut Teknologi & Bisnis Asia, Malang", desc: "Skripsi tentang sistem deteksi intrusi hybrid CNN-LSTM, terbit di jurnal Jurasik." },
+        t4: { role: "IT Support Technician", place: "CV Agrindo Cipta Mandiri (situsMESIN), Malang", desc: "Dukungan perangkat keras, jaringan, dan kebutuhan IT harian pengguna." },
+        t5: { role: "Rekayasa Perangkat Lunak", place: "SMK Negeri 5 Malang", desc: "Sekolah menengah kejuruan, tempat baris kode pertama ditulis." },
       },
     },
     brotherhood: {
@@ -501,7 +519,14 @@ export const strings = {
       rip: "Requiescat in pace",
       rights: "Hak cipta dilindungi.",
       disclaimer: "Tema buatan penggemar. Tidak berafiliasi dengan atau didukung oleh Ubisoft.",
+      creditFrom: "Ikon logo dari",
+      creditBy: "karya",
+      creditChanges: ". Ketebalan garis dan warna diubah.",
+      eagleFrom: "Siluet elang dari",
+      eagleChanges: ". Dipecah jadi sayap yang beranimasi.",
       top: "Kembali ke atap",
+      hintBefore: "Psst. Ketik",
+      hintAfter: "di mana saja di halaman ini.",
     },
   },
 };

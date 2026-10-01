@@ -8,17 +8,59 @@ const pad = (n) => String(n).padStart(2, "0");
 const escapeAttr = (value) => String(value).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 
 let logoUrl = null;
+let eagleShape = null;
+let rigCount = 0;
 
-export function resolveLogo() {
-  const src = site.logo?.src;
-  if (!src) return Promise.resolve(null);
+function probeImage(src) {
   const url = new URL(src, document.baseURI).href;
   return new Promise((resolve) => {
     const probe = new Image();
-    probe.onload = () => resolve((logoUrl = url));
+    probe.onload = () => resolve(url);
     probe.onerror = () => resolve(null);
     probe.src = url;
   });
+}
+
+export async function resolveLogo() {
+  const src = site.logo?.src;
+  if (!src) return null;
+  logoUrl = await probeImage(src);
+  return logoUrl;
+}
+
+export async function resolveEagle() {
+  const { src, rig } = site.eagle ?? {};
+  if (!src || !rig) return null;
+  try {
+    const response = await fetch(new URL(src, document.baseURI));
+    if (!response.ok) return null;
+    const doc = new DOMParser().parseFromString(await response.text(), "image/svg+xml");
+    const path = doc.querySelector("path");
+    if (!path) return null;
+    eagleShape = {
+      viewBox: doc.querySelector("svg")?.getAttribute("viewBox") ?? "0 0 360 360",
+      d: path.getAttribute("d"),
+    };
+  } catch {
+    eagleShape = null;
+  }
+  return eagleShape;
+}
+
+export const hasRiggedEagle = () => Boolean(eagleShape);
+
+export function riggedEagle(className = "") {
+  const { far, near, body, joints } = site.eagle.rig;
+  const id = `eagle-rig-${++rigCount}`;
+  const d = escapeAttr(eagleShape.d);
+  const piece = (part) => `<path d="${d}" clip-path="url(#${id}-${part})"/>`;
+  const wing = (part, config) =>
+    `<g class="eagle-rig__wing eagle-rig__wing--${part}" style="transform-origin: ${config.pivot[0]}px ${config.pivot[1]}px">${piece(part)}</g>`;
+  const clips = Object.entries({ far, near, body })
+    .map(([part, config]) => `<clipPath id="${id}-${part}"><polygon points="${config.clip}"/></clipPath>`)
+    .join("");
+  const joint = joints.map(([cx, cy, r]) => `<circle cx="${cx}" cy="${cy}" r="${r}"/>`).join("");
+  return `<svg class="eagle-rig ${className}" viewBox="${eagleShape.viewBox}" fill="currentColor" aria-hidden="true" focusable="false"><defs>${clips}</defs>${wing("far", far)}<g class="eagle-rig__body">${piece("body")}${joint}</g>${wing("near", near)}</svg>`;
 }
 
 export const getLogo = () => logoUrl;

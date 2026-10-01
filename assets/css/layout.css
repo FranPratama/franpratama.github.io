@@ -48,11 +48,18 @@
 .nav__insignia {
   width: 30px;
   height: 30px;
-  transition: transform 0.6s var(--ease-out);
+  transition: transform 0.5s var(--ease-out), color 0.3s, filter 0.3s;
 }
 
 .nav__brand:hover .nav__insignia {
-  transform: rotate(180deg) scale(0.9);
+  transform: scale(1.15);
+  color: var(--blood-bright);
+  filter: drop-shadow(0 0 8px rgba(193, 18, 31, 0.6));
+}
+
+.eagle-vision .nav__brand:hover .nav__insignia {
+  color: var(--gold-bright);
+  filter: drop-shadow(0 0 8px rgba(216, 180, 119, 0.7));
 }
 
 .nav__list {
@@ -414,10 +421,16 @@
   top: 0;
   left: 0;
   z-index: -2;
-  width: clamp(48px, 6vw, 86px);
-  color: #070707;
+  width: clamp(64px, 7vw, 110px);
+  color: #0a0507;
   opacity: 0;
   pointer-events: none;
+  filter: drop-shadow(0 0 1px rgba(255, 110, 70, 0.9)) drop-shadow(0 0 10px rgba(193, 18, 31, 0.55));
+  transition: filter 0.6s;
+}
+
+.eagle-vision .hero__eagle {
+  filter: drop-shadow(0 0 1px var(--gold-bright)) drop-shadow(0 0 12px rgba(216, 180, 119, 0.8));
 }
 
 .hero__content {
@@ -615,6 +628,28 @@
   opacity: 0.75;
 }
 
+.footer__credit {
+  max-width: 60ch;
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--bone-dim);
+  opacity: 0.7;
+}
+
+.footer__credit + .footer__credit {
+  margin-top: -10px;
+}
+
+.footer__credit a {
+  color: var(--gold-bright);
+  border-bottom: 1px solid rgba(216, 180, 119, 0.4);
+  transition: border-color 0.3s;
+}
+
+.footer__credit a:hover {
+  border-bottom-color: var(--gold-bright);
+}
+
 .footer__top {
   display: inline-flex;
   align-items: center;
@@ -625,6 +660,44 @@
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--gold-bright);
+}
+
+.footer__hint {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  color: var(--bone-dim);
+  opacity: 0.55;
+  transition: opacity 0.3s;
+}
+
+.footer__hint:hover {
+  opacity: 0.9;
+}
+
+.footer__kbd {
+  padding: 2px 8px 3px;
+  border: 1px solid rgba(176, 141, 87, 0.6);
+  border-bottom-width: 2px;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--gold-bright);
+  transition: background 0.3s, transform 0.15s;
+}
+
+.footer__kbd:hover {
+  background: rgba(216, 180, 119, 0.12);
+}
+
+.footer__kbd:active {
+  transform: translateY(1px);
 }
 
 .footer__top svg {

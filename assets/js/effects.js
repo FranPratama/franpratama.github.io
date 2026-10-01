@@ -1,5 +1,6 @@
 import { scramble, prefersReducedMotion } from "./scramble.js";
 import { eagle } from "./svg.js";
+import { hasRiggedEagle, riggedEagle } from "./render.js";
 import { t } from "./i18n.js";
 
 export const isTyping = (event) => Boolean(event.target.closest?.("input, textarea, select, [contenteditable]"));
@@ -209,7 +210,7 @@ export function leapOfFaith() {
 
   const diver = document.createElement("div");
   diver.className = "dive-eagle";
-  diver.innerHTML = eagle("is-gliding");
+  diver.innerHTML = hasRiggedEagle() ? riggedEagle("is-gliding") : eagle("is-gliding");
   document.body.append(diver);
   const vw = window.innerWidth;
   const vh = window.innerHeight;
@@ -228,6 +229,12 @@ export function leapOfFaith() {
 export function initEasterEgg() {
   const word = "leap";
   let buffer = "";
+  console.log(
+    `%c${t("hero.creed")}%c\n${t("ui.consoleHint")}`,
+    "font: 700 16px Cinzel, Georgia, serif; color: #c1121f; letter-spacing: 0.08em;",
+    "font: 12px monospace; color: #b3ab9d;",
+  );
+  document.querySelectorAll("[data-leap-egg]").forEach((button) => button.addEventListener("click", leapOfFaith));
   window.addEventListener("keydown", (event) => {
     if (isTyping(event) || event.metaKey || event.ctrlKey || event.altKey || event.key.length !== 1) return;
     buffer = (buffer + event.key.toLowerCase()).slice(-word.length);

@@ -249,6 +249,50 @@
   to { transform: scaleY(-0.55) rotate(-6deg); }
 }
 
+
+.eagle-rig {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.eagle-rig__wing {
+  transform-box: view-box;
+  animation: 800ms ease-in-out infinite;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.eagle-rig__wing--far {
+  animation-name: eagle-flap-far;
+}
+
+.eagle-rig__wing--near {
+  animation-name: eagle-flap-near;
+}
+
+.eagle-rig.is-gliding .eagle-rig__wing {
+  animation: none;
+}
+
+.eagle-rig.is-gliding .eagle-rig__wing--far {
+  transform: rotate(-12deg);
+}
+
+.eagle-rig.is-gliding .eagle-rig__wing--near {
+  transform: rotate(14deg);
+}
+
+@keyframes eagle-flap-far {
+  0%, 100% { transform: rotate(0deg); }
+  40% { transform: rotate(-44deg) scale(1, 0.9); }
+}
+
+@keyframes eagle-flap-near {
+  0%, 100% { transform: rotate(0deg); }
+  40% { transform: rotate(48deg) scale(0.92, 1); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .eagle-vision [data-target] {
     animation: none;

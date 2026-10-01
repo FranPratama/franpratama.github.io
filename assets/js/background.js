@@ -1,4 +1,5 @@
 import { eagle } from "./svg.js";
+import { hasRiggedEagle, riggedEagle } from "./render.js";
 import { prefersReducedMotion } from "./scramble.js";
 
 function initParallax(hero, isVisible) {
@@ -94,35 +95,51 @@ function initDust(canvas, isVisible) {
 }
 
 function initEagle(host, isVisible) {
-  if (!host) return;
-  host.innerHTML = eagle();
+  if (!host) return () => {};
+  host.innerHTML = hasRiggedEagle() ? riggedEagle() : eagle();
   const svg = host.firstElementChild;
   const hero = host.parentElement;
+  let timer = 0;
 
-  const schedule = (delay = 12000 + Math.random() * 6000) => setTimeout(fly, delay);
+  const schedule = (delay = 8000 + Math.random() * 4000) => {
+    clearTimeout(timer);
+    timer = setTimeout(fly, delay);
+  };
 
   function fly() {
     if (!isVisible() || document.hidden) {
-      schedule(4000);
+      schedule(3000);
       return;
     }
     const width = hero.clientWidth;
     const height = hero.clientHeight;
-    const leftToRight = Math.random() < 0.6;
-    const startY = height * (0.1 + Math.random() * 0.22);
-    const arc = height * (0.04 + Math.random() * 0.1);
-    const duration = 9000 + Math.random() * 4000;
-    const scale = 0.55 + Math.random() * 0.6;
+    const narrow = width <= 700;
+    const cx = width * (narrow ? 0.62 : 0.8);
+    const cy = height * 0.36;
+    const rx = width * (narrow ? 0.3 : 0.13);
+    const ry = height * 0.11;
+    const direction = Math.random() < 0.5 ? 1 : -1;
+    const startAngle = Math.random() * Math.PI * 2;
+    const sweep = Math.PI * 2.5;
+    const duration = 14000;
+    const halfWidth = host.offsetWidth / 2;
+    const halfHeight = host.offsetHeight / 2;
     const startedAt = performance.now();
-    host.style.opacity = "1";
 
     const step = (now) => {
       const progress = Math.min((now - startedAt) / duration, 1);
-      const distance = (width + 260) * progress;
-      const x = leftToRight ? -130 + distance : width + 130 - distance;
-      const y = startY - Math.sin(progress * Math.PI) * arc + Math.sin(progress * Math.PI * 6) * 6;
-      svg.classList.toggle("is-gliding", Math.sin(progress * Math.PI * 3) > 0.2);
-      host.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${leftToRight ? scale : -scale}, ${scale})`;
+      const angle = startAngle + direction * sweep * progress;
+      const x = cx + rx * Math.cos(angle);
+      const y = cy + ry * Math.sin(angle);
+      const vx = -rx * Math.sin(angle) * direction;
+      const vy = ry * Math.cos(angle) * direction;
+      const facing = vx >= 0 ? 1 : -1;
+      const tilt = Math.max(-18, Math.min(18, ((Math.atan2(vy, Math.abs(vx)) * 180) / Math.PI) * 0.5));
+      const bob = Math.sin(now * 0.004) * 3;
+      const scale = 0.75 + (0.35 * (Math.sin(angle) + 1)) / 2;
+      host.style.opacity = String(Math.min(1, progress / 0.1, (1 - progress) / 0.1));
+      svg.classList.toggle("is-gliding", vy > 0);
+      host.style.transform = `translate3d(${x - halfWidth}px, ${y - halfHeight + bob}px, 0) rotate(${facing * tilt}deg) scale(${facing * scale}, ${scale})`;
       if (progress < 1) {
         requestAnimationFrame(step);
       } else {
@@ -133,7 +150,7 @@ function initEagle(host, isVisible) {
     requestAnimationFrame(step);
   }
 
-  schedule(3500);
+  return () => schedule(1500);
 }
 
 export function initBackground() {
@@ -148,5 +165,5 @@ export function initBackground() {
 
   initParallax(hero, isVisible);
   initDust(hero.querySelector(".hero__dust"), isVisible);
-  initEagle(hero.querySelector(".hero__eagle"), isVisible);
+  return { startEagle: initEagle(hero.querySelector(".hero__eagle"), isVisible) };
 }
