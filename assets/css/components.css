@@ -299,6 +299,18 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
   gap: 24px;
+  container-type: inline-size;
+}
+
+.arsenal-card--featured {
+  grid-column: 1 / -1;
+}
+
+@container (min-width: 864px) {
+  .arsenal-card--featured {
+    justify-self: center;
+    width: calc((100% - 24px) / 2);
+  }
 }
 
 .arsenal-card {
@@ -389,16 +401,24 @@
 }
 
 .arsenal-card__list {
-  display: grid;
-  gap: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .skill {
-  display: grid;
-  grid-template-columns: 22px 1fr auto;
+  display: inline-flex;
   align-items: center;
-  column-gap: 12px;
-  row-gap: 7px;
+  gap: 10px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  background: rgba(232, 226, 214, 0.03);
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.skill:hover {
+  border-color: rgba(176, 141, 87, 0.55);
+  background: rgba(176, 141, 87, 0.08);
 }
 
 .skill__icon {
@@ -415,40 +435,7 @@
 }
 
 .skill__name {
-  font-size: 1.02rem;
-}
-
-.skill__level {
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  color: var(--animus);
-}
-
-.skill__bar {
-  grid-column: 1 / -1;
-  position: relative;
-  height: 4px;
-  background: rgba(232, 226, 214, 0.08);
-  overflow: hidden;
-}
-
-.skill__bar::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(90deg, transparent 0 9px, var(--ash) 9px 11px);
-}
-
-.skill__fill {
-  display: block;
-  height: 100%;
-  width: calc(var(--level) * 100%);
-  background: linear-gradient(90deg, var(--blood), var(--blood-bright) 70%, var(--gold-bright));
-  transform-origin: left;
-}
-
-.motion .skill__fill {
-  transform: scaleX(0);
+  font-size: 0.98rem;
 }
 
 .filters {

@@ -93,26 +93,6 @@ export function initCounters(motion) {
   });
 }
 
-export function initSkillBars(motion) {
-  if (!motion) return;
-  const { gsap, ScrollTrigger } = window;
-  document.querySelectorAll(".arsenal-card").forEach((card) => {
-    ScrollTrigger.create({
-      trigger: card,
-      start: "top 82%",
-      once: true,
-      onEnter: () =>
-        gsap.to(card.querySelectorAll(".skill__fill"), {
-          scaleX: 1,
-          duration: 1.4,
-          ease: "expo.out",
-          stagger: 0.08,
-          delay: 0.3,
-        }),
-    });
-  });
-}
-
 export function initSectionTracking(onChange) {
   const line = document.querySelector(".glitch-line");
   const reduced = prefersReducedMotion();

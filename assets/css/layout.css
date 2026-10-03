@@ -587,7 +587,7 @@
 
 .footer {
   position: relative;
-  padding: 72px 0 40px;
+  padding: 44px 0 28px;
   border-top: 1px solid var(--line);
   background: var(--ink);
   text-align: center;
@@ -596,18 +596,18 @@
 .footer__inner {
   display: grid;
   justify-items: center;
-  gap: 18px;
+  gap: 10px;
 }
 
 .footer__insignia {
-  width: 54px;
-  height: 54px;
+  width: 40px;
+  height: 40px;
   opacity: 0.9;
 }
 
 .footer__rip {
   font-family: var(--font-display);
-  font-size: 1.1rem;
+  font-size: 1rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--bone);
@@ -637,7 +637,7 @@
 }
 
 .footer__credit + .footer__credit {
-  margin-top: -10px;
+  margin-top: -4px;
 }
 
 .footer__credit a {
@@ -654,7 +654,7 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  margin-top: 6px;
+  margin-top: 4px;
   font-family: var(--font-mono);
   font-size: 0.74rem;
   letter-spacing: 0.22em;

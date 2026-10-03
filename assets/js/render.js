@@ -1,7 +1,7 @@
 import { site } from "./content.js";
 import { icons, insignia } from "./svg.js";
 
-const ROMAN = ["I", "II", "III", "IV", "V", "VI"];
+const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII"];
 
 const pad = (n) => String(n).padStart(2, "0");
 
@@ -125,7 +125,7 @@ function renderOrigins() {
 function renderArsenal() {
   document.querySelector("#arsenal-grid").innerHTML = site.arsenal
     .map(
-      (category, index) => `<article class="arsenal-card" data-reveal>
+      (category, index) => `<article class="arsenal-card${category.featured ? " arsenal-card--featured" : ""}" data-reveal>
   <header class="arsenal-card__head">
     <span class="arsenal-card__slot" aria-hidden="true"><span>${ROMAN[index] ?? index + 1}</span></span>
     <div>
@@ -140,8 +140,6 @@ function renderArsenal() {
         (skill) => `<li class="skill">
       <span class="skill__icon" style="--icon: url('${escapeAttr(skill.icon)}')" aria-hidden="true"></span>
       <span class="skill__name">${skill.name}</span>
-      <span class="skill__level"><span class="sr-only" data-i18n="arsenal.sync"></span> ${skill.level}%</span>
-      <span class="skill__bar" aria-hidden="true"><span class="skill__fill" style="--level: ${skill.level / 100}"></span></span>
     </li>`,
       )
       .join("")}

@@ -46,6 +46,5 @@ fx.playHeroIntro(motion);
 fx.initReveals(motion);
 fx.initScrambleOnView();
 fx.initCounters(motion);
-fx.initSkillBars(motion);
 
 if (motion) onLangChange(() => setTimeout(() => window.ScrollTrigger.refresh(), 700));
