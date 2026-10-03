@@ -35,11 +35,8 @@
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.18, 1);
 
-  --z-bg: 0;
-  --z-content: 2;
   --z-overlay: 40;
   --z-nav: 50;
-  --z-menu: 60;
   --z-modal: 80;
   --z-cursor: 90;
   --z-loader: 100;

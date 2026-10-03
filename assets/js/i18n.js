@@ -63,7 +63,7 @@ export function applyTranslations(root = document, { animate = false } = {}) {
   }
 }
 
-export function setLang(lang) {
+function setLang(lang) {
   if (!(lang in strings) || lang === current) return;
   current = lang;
   store(lang);

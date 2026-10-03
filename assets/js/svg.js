@@ -33,7 +33,6 @@ const fill = (body) => `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden
 export const icons = {
   blade: stroke('<path d="M20 3 9 14"/><path d="M20 3l-2.5 7.5L11 17M20 3l-7.5 2.5L6 12"/><path d="M6 12l6 6M4.5 16.5l3 3M3 21l3-3"/>'),
   sword: stroke('<path d="M12 2l2.2 3v11.5H9.8V5z"/><path d="M6.5 16.5h11M12 16.5V21M10 21.5h4"/>'),
-  quill: stroke('<path d="M20 3C11 4 6.5 9.5 5 18l-1 3 3-1c8.5-1.5 13-6 13-17z"/><path d="M5 18 14 9"/>'),
   eye: stroke('<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2"/>'),
   arrowDown: stroke('<path d="M12 4v16M5 13l7 7 7-7"/>'),
   arrowUp: stroke('<path d="M12 20V4M5 11l7-7 7 7"/>'),

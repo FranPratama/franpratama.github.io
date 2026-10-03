@@ -168,15 +168,6 @@
   transform: scaleX(var(--progress, 0));
 }
 
-.loader__meta {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  font-size: 0.68rem;
-  letter-spacing: 0.2em;
-  opacity: 0.55;
-}
-
 .loader__status {
   min-height: 1.4em;
   font-size: 0.72rem;

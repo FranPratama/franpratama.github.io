@@ -177,7 +177,7 @@ function streak() {
   overlay.classList.add("is-active");
 }
 
-export function leapOfFaith() {
+function leapOfFaith() {
   const banner = document.createElement("div");
   banner.className = "leap-banner";
   banner.setAttribute("aria-hidden", "true");
