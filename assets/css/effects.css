@@ -141,6 +141,67 @@
   color: var(--gold-bright);
 }
 
+.glyph {
+  position: absolute;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  color: var(--animus);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s, visibility 0.6s, transform 0.3s var(--ease-out);
+}
+
+.glyph svg {
+  width: 100%;
+  height: 100%;
+}
+
+.eagle-vision .glyph {
+  opacity: 0.9;
+  visibility: visible;
+  animation: glyph-pulse 2.4s ease-in-out infinite;
+}
+
+.eagle-vision .glyph:hover,
+.eagle-vision .glyph:focus-visible {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+.eagle-vision .glyph.is-found {
+  opacity: 0.35;
+  animation: none;
+}
+
+.glyph.is-found::after {
+  content: "";
+  position: absolute;
+  right: 2px;
+  bottom: 4px;
+  width: 5px;
+  height: 9px;
+  border-right: 2px solid var(--gold-bright);
+  border-bottom: 2px solid var(--gold-bright);
+  transform: rotate(45deg);
+}
+
+@keyframes glyph-pulse {
+  0%, 100% { filter: drop-shadow(0 0 2px rgba(207, 232, 255, 0.4)); }
+  50% { filter: drop-shadow(0 0 10px rgba(207, 232, 255, 0.95)); }
+}
+
+.dossier--truth .dossier__title {
+  color: var(--animus);
+}
+
+.dossier--truth .dossier__body {
+  color: var(--bone);
+}
+
 .ev-transition,
 .ev-transition *,
 .ev-transition *::before,
@@ -297,6 +358,11 @@
   .eagle-vision [data-target] {
     animation: none;
     filter: drop-shadow(0 0 6px rgba(216, 180, 119, 0.8));
+  }
+
+  .eagle-vision .glyph {
+    animation: none;
+    filter: drop-shadow(0 0 6px rgba(207, 232, 255, 0.8));
   }
 }
 

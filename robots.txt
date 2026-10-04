@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /abstergo
+Disallow: /templar-archives
+
+# We work in the dark to serve the light.
+# Crawl freely, but leave the Apple where it is.
+
+Sitemap: https://franpratama.github.io/sitemap.xml

@@ -151,6 +151,21 @@ export function initDossier() {
     actions.innerHTML = links.join("");
   };
 
+  document.addEventListener("click", (event) => {
+    const trigger = event.target.closest("[data-open]");
+    if (!trigger || event.target.closest("a")) return;
+    currentId = trigger.dataset.open;
+    fill();
+    dialog.showModal();
+  });
+
+  bindDialog(dialog);
+  onLangChange(() => {
+    if (dialog.open) fill();
+  });
+}
+
+export function bindDialog(dialog) {
   const close = () => {
     if (!dialog.open || dialog.classList.contains("is-closing")) return;
     if (prefersReducedMotion()) {
@@ -168,14 +183,6 @@ export function initDossier() {
     );
   };
 
-  document.addEventListener("click", (event) => {
-    const trigger = event.target.closest("[data-open]");
-    if (!trigger || event.target.closest("a")) return;
-    currentId = trigger.dataset.open;
-    fill();
-    dialog.showModal();
-  });
-
   dialog.querySelector("[data-close]").addEventListener("click", close);
   dialog.addEventListener("cancel", (event) => {
     event.preventDefault();
@@ -184,9 +191,7 @@ export function initDossier() {
   dialog.addEventListener("click", (event) => {
     if (event.target === dialog) close();
   });
-  onLangChange(() => {
-    if (dialog.open) fill();
-  });
+  return close;
 }
 
 export function initContactForm() {

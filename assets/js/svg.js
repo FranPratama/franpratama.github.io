@@ -45,9 +45,27 @@ export const icons = {
   instagram: stroke('<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"/>'),
   mail: stroke('<rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 6 9 7 9-7"/>'),
   discord: fill('<path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/>'),
+  hiddenBlade:
+    '<svg class="hidden-blade" viewBox="0 0 24 84" aria-hidden="true" focusable="false">' +
+    '<defs><linearGradient id="hidden-blade-steel" x1="0" x2="1"><stop offset="0" stop-color="#8d8a84"/><stop offset=".5" stop-color="#e8e2d6"/><stop offset="1" stop-color="#8d8a84"/></linearGradient>' +
+    '<clipPath id="hidden-blade-exit"><rect x="0" y="40" width="24" height="44"/></clipPath></defs>' +
+    '<g clip-path="url(#hidden-blade-exit)"><g class="hidden-blade__blade"><path d="M9.6 38h4.8v28L12 83l-2.4-17z" fill="url(#hidden-blade-steel)"/><path class="hidden-blade__fuller" d="M12 40v34"/></g></g>' +
+    '<path class="hidden-blade__strap" d="M2.4 17.5h2.6v6H2.4zM19 17.5h2.6v6H19zM2.4 28.5h2.6v6H2.4zM19 28.5h2.6v6H19z"/>' +
+    '<path class="hidden-blade__body" d="M5 12h14v26l-2.5 3h-9L5 38z"/>' +
+    '<circle class="hidden-blade__medal" cx="12" cy="10" r="7"/><circle class="hidden-blade__gem" cx="12" cy="10" r="2.8"/>' +
+    '<path class="hidden-blade__trim" d="M12 19.5v4.5M8.5 27v8a3.5 3.5 0 0 0 7 0v-8"/>' +
+    '<g class="hidden-blade__rivet"><circle cx="7.2" cy="15.5" r=".9"/><circle cx="16.8" cy="15.5" r=".9"/><circle cx="7.2" cy="36.8" r=".9"/><circle cx="16.8" cy="36.8" r=".9"/></g></svg>',
   bomb: stroke('<circle cx="10" cy="14" r="7"/><path d="M15 9l2.5-2.5"/><path d="M17.5 6.5c.5-2 2-3 3.5-2.5"/><path d="M7 12a3 3 0 0 1 3-3"/>'),
   dart: stroke('<path d="M21 3l-3.8 6.2L14 10l.8-3.2z"/><path d="M14 10 4 20"/><path d="M8 16 3.5 15.5 3 18M8 16l.5 4.5L6 21"/>'),
   ropedart: stroke('<path d="M21 3l-3.8 6.2L14 10l.8-3.2z"/><circle cx="12.6" cy="11.4" r="1.4"/><path d="M11.6 12.4c-2.6 1.8-.8 4.4-3.8 5.4-2.4.8-4.4-1-3.4-2.9.9-1.7 3.4-1.1 3.4.8 0 2.4-1.9 4.2-4.3 4.2"/>'),
   pouch: stroke('<path d="M8.5 8h7l3.2 5.2C20.8 17.5 18 21 12 21s-8.8-3.5-6.7-7.8z"/><path d="M8.5 8 7 4.5c1.8.8 3.4.8 5 0 1.6.8 3.2.8 5 0L15.5 8"/><circle cx="12" cy="15" r="2.3"/>'),
   apple: stroke('<circle cx="12" cy="12" r="9"/><path d="M3.5 10h4.5l2 2.5h4l2-2.5h4.5"/><path d="M5.5 17h4l1.5-2h2l1.5 2h4"/><circle cx="12" cy="12.5" r="0.8"/>'),
 };
+
+export const glyphShapes = [
+  stroke('<path d="M12 3 21 19H3z"/><circle cx="12" cy="13.5" r="2"/><path d="M12 7.5v2"/>'),
+  stroke('<circle cx="12" cy="12" r="8.5"/><path d="M12 6l6 6-6 6-6-6z"/><circle cx="12" cy="12" r="1"/>'),
+  stroke('<path d="M12 2.5 20.2 7.25v9.5L12 21.5 3.8 16.75v-9.5z"/><path d="M12 8v8M8.5 10l7 4M15.5 10l-7 4"/>'),
+  stroke('<path d="M3 12c3-5 15-5 18 0-3 5-15 5-18 0z"/><circle cx="12" cy="12" r="2.2"/><path d="M12 4V2.5M12 21.5V20M5 6 4 5M19 6l1-1"/>'),
+  stroke('<path d="M12 12m-2 0a2 2 0 1 0 4 0a4 4 0 1 0-8 0a6 6 0 1 0 12 0a8 8 0 1 0-16 0"/>'),
+];
