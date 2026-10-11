@@ -5,28 +5,12 @@ import { toast } from "./effects.js";
 import { bindDialog } from "./ui.js";
 import { prefersReducedMotion } from "./scramble.js";
 
-const STORAGE_KEY = "animus-glyphs";
-const SIZE = 32;
+const SIZE = 40;
 const EDGE = 12;
 const GAP = 10;
 const ATTEMPTS = 400;
 const CONTENT =
   "p, h1, h2, h3, h4, li, a, button:not(.glyph), img:not(.hero__layer), input, textarea, select, label, blockquote, dl, figure, article, form, .hero__actions, .portrait, .filters, .scroll-blade";
-
-function readFound() {
-  try {
-    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    return new Set(Array.isArray(stored) ? stored : []);
-  } catch {
-    return new Set();
-  }
-}
-
-function saveFound(found) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify([...found]));
-  } catch {}
-}
 
 function overlap(a, b) {
   const x = Math.max(0, Math.min(a.right, b.right) - Math.max(a.left, b.left));
@@ -69,10 +53,8 @@ export function initGlyphs() {
   const dialog = document.querySelector("#truth");
   if (!dialog) return;
   const close = bindDialog(dialog);
-  const found = readFound();
+  const found = new Set();
   const total = site.glyphs.length;
-  const known = new Set(site.glyphs.map((glyph) => glyph.id));
-  [...found].forEach((id) => known.has(id) || found.delete(id));
 
   const glyphs = site.glyphs
     .map((glyph) => {
@@ -85,7 +67,6 @@ export function initGlyphs() {
       button.dataset.i18nAttr = "aria-label:glyphs.label";
       button.setAttribute("aria-label", t("glyphs.label"));
       button.innerHTML = glyphShapes[glyph.shape] ?? "";
-      button.classList.toggle("is-found", found.has(glyph.id));
       section.append(button);
       return { id: glyph.id, button, section };
     })
@@ -107,7 +88,6 @@ export function initGlyphs() {
         return;
       }
       found.add(id);
-      saveFound(found);
       button.classList.add("is-found");
       toast(t("glyphs.found").replace("{n}", found.size).replace("{total}", total));
       if (found.size === total) setTimeout(openTruth, prefersReducedMotion() ? 0 : 900);
@@ -122,8 +102,8 @@ export function initGlyphs() {
 
   dialog.querySelector("[data-truth-reset]")?.addEventListener("click", () => {
     found.clear();
-    saveFound(found);
     glyphs.forEach(({ button }) => button.classList.remove("is-found"));
+    placeAll();
     close();
   });
 

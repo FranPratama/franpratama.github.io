@@ -139,7 +139,8 @@
   height: 20px;
 }
 
-.eagle-btn[aria-pressed="true"] {
+.eagle-btn[aria-pressed="true"],
+.music-btn[aria-pressed="true"] {
   border-color: var(--gold-bright);
   color: var(--gold-bright);
   box-shadow: 0 0 16px rgba(216, 180, 119, 0.35);
@@ -610,6 +611,25 @@
   }
 }
 
+@media (min-width: 641px) and (max-height: 960px) {
+  .hero__content {
+    gap: clamp(10px, 1.8vh, 26px);
+    padding-bottom: clamp(40px, 8vh, 260px);
+  }
+
+  .hero__name {
+    font-size: min(clamp(3rem, 1.2rem + 8vw, 8rem), 15vh);
+  }
+
+  .hero__creed {
+    font-size: clamp(1.05rem, 0.9rem + 0.6vw, 1.4rem);
+  }
+
+  .scroll-blade {
+    display: none;
+  }
+}
+
 .footer {
   position: relative;
   padding: 44px 0 28px;
@@ -659,10 +679,6 @@
   font-style: italic;
   color: var(--bone-dim);
   opacity: 0.7;
-}
-
-.footer__credit + .footer__credit {
-  margin-top: -4px;
 }
 
 .footer__credit a {

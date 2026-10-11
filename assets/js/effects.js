@@ -177,6 +177,36 @@ function streak() {
   overlay.classList.add("is-active");
 }
 
+const DIVE_MS = 1600;
+const DIVE_EASING = "cubic-bezier(.55,0,.8,.4)";
+
+const WING_POSES = {
+  glide: ["rotate(-12deg)", "rotate(14deg)"],
+  down: ["rotate(-44deg) scale(1, 0.9)", "rotate(48deg) scale(0.92, 1)"],
+  trim: ["rotate(-20deg)", "rotate(6deg)"],
+  draw: ["rotate(-28deg) scale(0.95, 0.85)", "rotate(-18deg) scale(0.95, 0.85)"],
+  drawDeep: ["rotate(-36deg) scale(0.9, 0.75)", "rotate(-42deg) scale(0.9, 0.75)"],
+  bend: ["rotate(-44deg) scale(0.85, 0.66)", "rotate(-64deg) scale(0.85, 0.66)"],
+  halfOpen: ["rotate(-50deg) scale(0.8, 0.58)", "rotate(-86deg) scale(0.8, 0.58)"],
+  half: ["rotate(-60deg) scale(0.75, 0.5)", "rotate(-100deg) scale(0.75, 0.5)"],
+  swept: ["rotate(-68deg) scale(0.72, 0.48)", "rotate(-114deg) scale(0.72, 0.48)"],
+};
+
+const WING_TIMELINE = [
+  [0, "glide"],
+  [0.48, "glide"],
+  [0.56, "down"],
+  [0.64, "glide"],
+  [0.7, "trim"],
+  [0.76, "draw"],
+  [0.8, "drawDeep"],
+  [0.84, "bend"],
+  [0.88, "halfOpen"],
+  [0.92, "half"],
+  [0.96, "swept"],
+  [1, "swept"],
+];
+
 function leapOfFaith() {
   const banner = document.createElement("div");
   banner.className = "leap-banner";
@@ -188,9 +218,10 @@ function leapOfFaith() {
   if (prefersReducedMotion()) return;
   streak();
 
+  const rigged = hasRiggedEagle();
   const diver = document.createElement("div");
   diver.className = "dive-eagle";
-  diver.innerHTML = hasRiggedEagle() ? riggedEagle("is-gliding") : eagle("is-gliding");
+  diver.innerHTML = rigged ? riggedEagle("is-gliding") : eagle("is-gliding");
   document.body.append(diver);
   const vw = window.innerWidth;
   const vh = window.innerHeight;
@@ -201,9 +232,16 @@ function leapOfFaith() {
         { transform: `translate(${0.4 * vw}px, ${0.3 * vh}px) rotate(40deg) scale(1)`, offset: 0.55 },
         { transform: `translate(${1.1 * vw}px, ${1.2 * vh}px) rotate(62deg) scale(1.4)` },
       ],
-      { duration: 1600, easing: "cubic-bezier(.55,0,.8,.4)" },
+      { duration: DIVE_MS, easing: DIVE_EASING },
     )
     .finished.then(() => diver.remove());
+
+  if (!rigged) return;
+  ["far", "near"].forEach((side, index) => {
+    const wing = diver.querySelector(`.eagle-rig__wing--${side}`);
+    const keyframes = WING_TIMELINE.map(([offset, name]) => ({ offset, transform: WING_POSES[name][index], easing: "ease-in-out" }));
+    wing?.animate(keyframes, { duration: DIVE_MS, fill: "forwards" });
+  });
 }
 
 export function initEasterEgg() {

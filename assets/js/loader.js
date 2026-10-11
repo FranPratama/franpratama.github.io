@@ -204,6 +204,7 @@ export function runLoader() {
         return;
       }
 
+      glitch();
       scramble(titleEl, t("loader.done"), { duration: 450 });
       const radius = Math.hypot(window.innerWidth, window.innerHeight) / 2 + 60;
       gsap
@@ -254,7 +255,6 @@ export function runLoader() {
       }
 
       drawHelix?.(now);
-      if (!reduced && Math.random() < 0.01) glitch();
 
       if (value >= 100) {
         finish();

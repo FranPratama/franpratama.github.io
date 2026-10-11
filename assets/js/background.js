@@ -96,14 +96,22 @@ function initDust(canvas, isVisible) {
 
 function initEagle(host, isVisible) {
   if (!host) return () => {};
-  host.innerHTML = hasRiggedEagle() ? riggedEagle() : eagle();
+  const rigged = hasRiggedEagle();
+  host.innerHTML = rigged ? riggedEagle("is-gliding") : eagle("is-gliding");
   const svg = host.firstElementChild;
+  const wings = rigged ? [svg.querySelector(".eagle-rig__wing--far"), svg.querySelector(".eagle-rig__wing--near")] : [];
   const hero = host.parentElement;
   let timer = 0;
 
   const schedule = (delay = 8000 + Math.random() * 4000) => {
     clearTimeout(timer);
     timer = setTimeout(fly, delay);
+  };
+
+  const trimWings = (now) => {
+    const trim = Math.sin(now * 0.0024) * 3;
+    wings[0].style.transform = `rotate(${-12 + trim}deg)`;
+    wings[1].style.transform = `rotate(${14 - trim}deg)`;
   };
 
   function fly() {
@@ -125,6 +133,9 @@ function initEagle(host, isVisible) {
     const halfWidth = host.offsetWidth / 2;
     const halfHeight = host.offsetHeight / 2;
     const startedAt = performance.now();
+    let flapUntil = startedAt + 1600;
+    let climbing = false;
+    let bobAmp = 0;
 
     const step = (now) => {
       const progress = Math.min((now - startedAt) / duration, 1);
@@ -133,13 +144,22 @@ function initEagle(host, isVisible) {
       const y = cy + ry * Math.sin(angle);
       const vx = -rx * Math.sin(angle) * direction;
       const vy = ry * Math.cos(angle) * direction;
-      const facing = vx >= 0 ? 1 : -1;
-      const tilt = Math.max(-18, Math.min(18, ((Math.atan2(vy, Math.abs(vx)) * 180) / Math.PI) * 0.5));
-      const bob = Math.sin(now * 0.004) * 3;
+
+      if (vy <= 0 && !climbing) flapUntil = now + 1600;
+      climbing = vy <= 0;
+      const flapping = now < flapUntil;
+      svg.classList.toggle("is-gliding", !flapping);
+      if (!flapping && wings.length) trimWings(now);
+
+      const vxNorm = vx / rx;
+      const turn = (vxNorm >= 0 ? 1 : -1) * Math.max(0.15, Math.min(1, Math.abs(vxNorm) * 6));
+      const pitch = Math.max(-8, Math.min(8, ((Math.atan2(vy, Math.abs(vx)) * 180) / Math.PI) * 0.3));
+      const bank = 22 * Math.sin(angle);
+      bobAmp += ((flapping ? 3 : 0) - bobAmp) * 0.08;
+      const bob = Math.sin(now * 0.00785) * bobAmp;
       const scale = 0.75 + (0.35 * (Math.sin(angle) + 1)) / 2;
       host.style.opacity = String(Math.min(1, progress / 0.1, (1 - progress) / 0.1));
-      svg.classList.toggle("is-gliding", vy > 0);
-      host.style.transform = `translate3d(${x - halfWidth}px, ${y - halfHeight + bob}px, 0) rotate(${facing * tilt}deg) scale(${facing * scale}, ${scale})`;
+      host.style.transform = `translate3d(${x - halfWidth}px, ${y - halfHeight + bob}px, 0) rotate(${Math.sign(turn) * pitch}deg) perspective(600px) rotateX(${bank}deg) scale(${turn * scale}, ${scale})`;
       if (progress < 1) {
         requestAnimationFrame(step);
       } else {

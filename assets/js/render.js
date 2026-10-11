@@ -171,12 +171,12 @@ function renderContracts() {
           ? `<a class="contract__link" href="${escapeAttr(contract.paper)}" target="_blank" rel="noopener" data-target><span data-i18n="contracts.paper"></span>${icons.arrowUpRight}</a>`
           : "",
       ].join("");
+      const stamp = contract.classified ? `<p class="contract__classified" data-i18n="contracts.classified"></p>` : "";
       return `<article class="contract" data-category="${contract.category}" data-reveal>
   <div class="contract__paper" style="--torn: ${tornEdge(index + 3)}" data-open="${contract.id}">
     <div class="contract__seal" aria-hidden="true">${emblem("", { bone: "#e8d9b8", blade: "#3a0507" })}</div>
     <p class="contract__no"><span data-i18n="contracts.no"></span> Nº ${pad(index + 1)} · ${contract.year}</p>
-    ${contract.classified ? `<p class="contract__classified" data-i18n="contracts.classified"></p>` : ""}
-    ${contract.image ? `<div class="contract__thumb"><img src="${escapeAttr(contract.image)}" alt="" loading="lazy"></div>` : ""}
+    ${contract.image ? `<div class="contract__thumb"><img src="${escapeAttr(contract.image)}" alt="" loading="lazy">${stamp}</div>` : stamp}
     <h3 class="contract__title" data-i18n="contracts.items.${contract.id}.title"></h3>
     <p class="contract__summary" data-i18n="contracts.items.${contract.id}.summary"></p>
     <ul class="contract__tags">${contract.tech.map((tech) => `<li>${tech}</li>`).join("")}</ul>

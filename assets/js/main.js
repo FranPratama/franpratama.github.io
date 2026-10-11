@@ -4,6 +4,7 @@ import { runLoader } from "./loader.js";
 import { initBackground } from "./background.js";
 import { initEagleVision } from "./eagle-vision.js";
 import { initGlyphs } from "./glyphs.js";
+import { initMusic } from "./music.js";
 import * as fx from "./effects.js";
 import * as ui from "./ui.js";
 import { prefersReducedMotion } from "./scramble.js";
@@ -13,6 +14,7 @@ const toTop = () => window.scrollTo({ top: 0, behavior: "instant" });
 toTop();
 
 initLang();
+initMusic();
 await Promise.all([resolveLogo(), resolveEagle()]);
 renderAll();
 applyTranslations();
