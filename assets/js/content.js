@@ -172,21 +172,21 @@ export const site = {
       classified: true,
     },
     {
+      id: "presence",
+      year: 2025,
+      category: "app",
+      tech: ["Python", "pypresence", "WinRT", "ytmusicapi"],
+      image: "",
+      repo: "https://github.com/FranPratama/discord-presence-games-youtube",
+    },
+    {
       id: "ids",
       year: 2025,
       category: "ml",
       tech: ["Python", "TensorFlow", "CNN-LSTM", "Jupyter", "UNSW-NB15"],
       image: "",
-      repo: "https://github.com/FranPratama/Intrusion-Detection-System-with-Hybrid-CNN-LSTM",
+      repo: "https://github.com/FranPratama/ids-hybrid-cnn-lstm",
       paper: "https://tunasbangsa.ac.id/ejurnal/index.php/jurasik/article/view/895",
-    },
-    {
-      id: "presence",
-      year: 2024,
-      category: "app",
-      tech: ["Python", "pypresence", "Windows Media API"],
-      image: "",
-      classified: true,
     },
     {
       id: "ar",
@@ -194,8 +194,8 @@ export const site = {
       category: "web",
       tech: ["AR.js", "JavaScript", "glTF"],
       image: "",
-      demo: "https://franpratama.github.io/AR-js-Test-with-Pattern-and-3D-Model/ar.html",
-      repo: "https://github.com/FranPratama/AR-js-Test-with-Pattern-and-3D-Model",
+      demo: "https://franpratama.github.io/arjs-marker-3d-model/ar.html",
+      repo: "https://github.com/FranPratama/arjs-marker-3d-model",
     },
   ],
   codex: [
@@ -334,9 +334,9 @@ export const strings = {
           detail: "The app pulls lecturer profiles from Google Scholar and shows citation counts, h-index, and a leaderboard. I'm not the original author. My part was getting it ready to run as a real service. I cleaned up the project structure, removed old experiment scripts and the database and .env file that had ended up in the repo, moved secrets into environment variables, and switched it from SQLite to MySQL. Then I added WhiteNoise for static files and wrote the Dockerfile and Kubernetes manifest.",
         },
         presence: {
-          title: "Discord Rich Presence Multi-Platform",
-          summary: "Background scripts that put your current game or YouTube Music track on your Discord status.",
-          detail: "Two small Windows tools. One watches window titles to figure out which game you're playing and updates your Discord status. The other reads the Windows media session and shows what you're listening to on YouTube or YouTube Music, album art included. Both handle pausing and seeking, reconnect if Discord crashes, and log to a file.",
+          title: "Discord Presence for Games and YouTube",
+          summary: "Two background scripts that show the game you're playing, or what's on YouTube and YouTube Music, as your Discord status.",
+          detail: "Two small Windows scripts that run quietly in the background. The game one checks open window titles every 15 seconds and shows the game on your Discord profile with a timer. The YouTube one reads what Windows reports as now playing, then shows the title, artist, cover art, and a progress bar for whatever's on YouTube or YouTube Music. It keeps up with pausing, skipping, and seeking, tries to stay quiet during ads, and finds cover art by searching YouTube Music, iTunes, and YouTube.",
         },
         ar: {
           title: "Marker-Based Web AR",
@@ -527,9 +527,9 @@ export const strings = {
           detail: "Aplikasi ini mengambil profil dosen dari Google Scholar lalu menampilkan jumlah sitasi, h-index, dan leaderboard. Aku bukan pembuat aslinya. Bagianku adalah membuatnya siap jalan sebagai layanan sungguhan. Aku merapikan struktur proyek, membuang skrip eksperimen lama serta database dan file .env yang ikut masuk ke repo, memindahkan secret ke environment variable, dan mengganti SQLite ke MySQL. Setelah itu aku menambahkan WhiteNoise untuk static file dan menulis Dockerfile serta manifest Kubernetes-nya.",
         },
         presence: {
-          title: "Discord Rich Presence Multi-Platform",
-          summary: "Skrip latar belakang yang menampilkan game atau lagu YouTube Music yang sedang jalan di status Discord.",
-          detail: "Dua tool kecil untuk Windows. Yang pertama membaca judul jendela untuk tahu game apa yang sedang dimainkan, lalu memperbarui status Discord. Yang kedua membaca sesi media Windows dan menampilkan apa yang sedang diputar di YouTube atau YouTube Music, lengkap dengan album art. Keduanya mengenali pause dan geser durasi, tersambung lagi sendiri kalau Discord crash, dan menyimpan log ke file.",
+          title: "Discord Presence for Games and YouTube",
+          summary: "Dua skrip latar belakang yang menampilkan game yang sedang dimainkan, atau yang sedang diputar di YouTube dan YouTube Music, sebagai status Discord.",
+          detail: "Dua skrip kecil untuk Windows yang jalan diam-diam di latar belakang. Skrip game mengecek judul jendela yang terbuka tiap 15 detik, lalu menampilkan game-nya di profil Discord lengkap dengan timer. Skrip YouTube membaca apa yang dilaporkan Windows sebagai sedang diputar, lalu menampilkan judul, artis, cover, dan progress bar untuk apa pun yang jalan di YouTube atau YouTube Music. Skrip ini ikut mengikuti pause, skip, dan geser durasi, berusaha diam saat iklan, dan mencari cover lewat YouTube Music, iTunes, dan YouTube.",
         },
         ar: {
           title: "AR Berbasis Marker di Web",
