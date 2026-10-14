@@ -155,6 +155,14 @@ export const site = {
       repo: "https://github.com/dikigambol/peace-oracle",
     },
     {
+      id: "sita",
+      year: 2026,
+      category: "devops",
+      tech: ["Node.js", "SQLite", "Docker", "Kubernetes", "GitHub Actions"],
+      image: "assets/img/contracts/sita.webp",
+      classified: true,
+    },
+    {
       id: "games",
       year: 2025,
       category: "web",
@@ -187,15 +195,6 @@ export const site = {
       image: "",
       repo: "https://github.com/FranPratama/ids-hybrid-cnn-lstm",
       paper: "https://tunasbangsa.ac.id/ejurnal/index.php/jurasik/article/view/895",
-    },
-    {
-      id: "ar",
-      year: 2023,
-      category: "web",
-      tech: ["AR.js", "JavaScript", "glTF"],
-      image: "",
-      demo: "https://franpratama.github.io/arjs-marker-3d-model/ar.html",
-      repo: "https://github.com/FranPratama/arjs-marker-3d-model",
     },
   ],
   codex: [
@@ -308,10 +307,15 @@ export const strings = {
           summary: "A Flask app that brings Zodiac, Shio, Javanese Weton, and Tarot readings together in one place. I built the Shio, Weton, and Tarot modules.",
           detail: "Peace Oracle started as someone else's project. I joined as a contributor, split the code into modules, and ended up building three of the four: Shio, Weton, and Tarot. Shio covers Ba Zi readings, compatibility, a daily almanac, quiz rooms, and a roasting mode. Weton handles birth and compatibility readings, a Javanese calendar, and finding a good day for big events. Tarot has a daily card, spreads up to the Celtic Cross, and answers your question through OpenRouter, falling back to its own answer bank when the AI quota runs out. I also redesigned the home page around an animated astrolabe, put the Zodiac and Tarot AI behind shared per-device and daily limits, and fixed a few Zodiac accuracy bugs and an XSS hole along the way.",
         },
+        sita: {
+          title: "Thesis & Academic Information System (SITA)",
+          summary: "Getting the IT department's thesis and academic system running on Kubernetes, as a contributor.",
+          detail: "SITA is what ITB Asia's IT department uses for theses, internships, academic advising, and class schedules. It's a Node.js app running on SQLite, and it isn't my project. I came in as a contributor to get it running on Kubernetes. I wrote the Dockerfile with a built-in healthcheck and the manifest with liveness and readiness probes, a persistent volume for the data, and an init container that fixes its permissions. Later I hardened the image with a multi-stage build and a non-root user, added persistent backups and a /up probe that matches the other campus systems, and rewrote the deploy workflow so it no longer relies on third-party actions or a sudo password. The repo is private, so this one stays classified.",
+        },
         campus: {
           title: "Campus Academic Platform",
           summary: "The deploy side of ITB Asia's information systems, from testing the pipelines as a Server Support Specialist to building them as a DevOps Engineer.",
-          detail: "ITB Asia runs dozens of information systems for students, lecturers, staff, and parents, mostly PHP and Python APIs with React front ends. When I started as a Server Support Specialist, my part was testing the Cloud Build pipelines, checking that updates deployed properly to Google Cloud, and helping the developers troubleshoot. Now, as a DevOps Engineer, I build and fix those pipelines myself. I've set up deployments over IAP, cleaned up the production settings, and I look after the local servers that host systems for campus units. The code lives on campus servers, so this one stays classified.",
+          detail: "ITB Asia runs dozens of information systems for students, lecturers, staff, and parents, mostly PHP and Python APIs with React front ends. When I started as a Server Support Specialist, my part was testing the Cloud Build pipelines, checking that updates deployed properly to Google Cloud, and helping the developers troubleshoot. Now, as a DevOps Engineer, I build and fix those pipelines myself. I've set up deployments over IAP, cleaned up the production settings, and I look after the local servers that host systems for campus units. A few of the systems I deploy there have their own contracts here: SITA, the Publication Monitoring System, and MEA. The code lives on campus servers, so this one stays classified.",
         },
         ids: {
           title: "Hybrid CNN-LSTM Intrusion Detection",
@@ -321,7 +325,7 @@ export const strings = {
         mea: {
           title: "Madani Entrepreneurship Academy 2026",
           summary: "Chunked file uploads and an automated Docker and Kubernetes deploy, added to the academy's Laravel platform as a contributor.",
-          detail: "MEA's Laravel app handles announcements, galleries, modules, reports, and participant submissions. It isn't my project. I joined as a contributor and worked on two things. First, uploads: big files now go up in 12 MB chunks, get stitched back together on the server, and pass through the existing validation, so the forms barely had to change. Second, deployment: I containerized the app, wrote the Kubernetes manifest with health checks and persistent storage, and set up a GitHub Actions pipeline that deploys and runs migrations on every push to main.",
+          detail: "MEA's Laravel app handles announcements, galleries, modules, reports, and participant submissions. It isn't my project. I joined as a contributor and worked on two things. First, uploads: big files now go up in 12 MB chunks, get stitched back together on the server, and pass through the existing validation, so the forms barely had to change. Second, deployment: I containerized the app, wrote the Kubernetes manifest with health checks and persistent storage, and set up a GitHub Actions pipeline that deploys and runs migrations on every push to main. Later I hardened the image so Apache runs without root, the base image is pinned, and PHP can't run from the storage folder, then rewrote the deploy workflow so it no longer needs third-party actions or a sudo password.",
         },
         games: {
           title: "Detectable Games on Discord",
@@ -331,17 +335,12 @@ export const strings = {
         simkampus: {
           title: "Publication Monitoring System",
           summary: "A Django dashboard that tracks lecturers' Google Scholar publications. I helped get it production-ready.",
-          detail: "The app pulls lecturer profiles from Google Scholar and shows citation counts, h-index, and a leaderboard. I'm not the original author. My part was getting it ready to run as a real service. I cleaned up the project structure, removed old experiment scripts and the database and .env file that had ended up in the repo, moved secrets into environment variables, and switched it from SQLite to MySQL. Then I added WhiteNoise for static files and wrote the Dockerfile and Kubernetes manifest.",
+          detail: "The app pulls lecturer profiles from Google Scholar and shows citation counts, h-index, and a leaderboard. I'm not the original author. My part was getting it ready to run as a real service. I cleaned up the project structure, removed old experiment scripts and the database and .env file that had ended up in the repo, moved secrets into environment variables, and switched it from SQLite to MySQL. Then I added WhiteNoise for static files and wrote the Dockerfile and Kubernetes manifest. Since then I've added a /up health check for the Kubernetes probes, pinned the gunicorn version, and hardened the image to run as a non-root user on Python 3.12 with a read-only root filesystem.",
         },
         presence: {
           title: "Discord Presence for Games and YouTube",
           summary: "Two background scripts that show the game you're playing, or what's on YouTube and YouTube Music, as your Discord status.",
           detail: "Two small Windows scripts that run quietly in the background. The game one checks open window titles every 15 seconds and shows the game on your Discord profile with a timer. The YouTube one reads what Windows reports as now playing, then shows the title, artist, cover art, and a progress bar for whatever's on YouTube or YouTube Music. It keeps up with pausing, skipping, and seeking, tries to stay quiet during ads, and finds cover art by searching YouTube Music, iTunes, and YouTube.",
-        },
-        ar: {
-          title: "Marker-Based Web AR",
-          summary: "Point your camera at a printed marker and a 3D model shows up, right in the browser.",
-          detail: "A small experiment for my Augmented and Virtual Reality class, built with AR.js, a custom pattern marker, and a glTF model. Nothing to install. It all runs in the browser.",
         },
         animus: {
           title: "Animus Portfolio",
@@ -501,10 +500,15 @@ export const strings = {
           summary: "Aplikasi Flask yang mengumpulkan ramalan Zodiak, Shio, Weton, dan Tarot di satu tempat. Aku membangun modul Shio, Weton, dan Tarot.",
           detail: "Peace Oracle awalnya proyek orang lain. Aku ikut sebagai kontributor, memecah kodenya jadi modul, dan akhirnya membangun tiga dari empat modulnya: Shio, Weton, dan Tarot. Shio punya ramalan Ba Zi, cek kecocokan, almanak harian, ruang kuis, dan mode roasting. Weton bisa membaca weton lahir dan kecocokan, menampilkan kalender Jawa, dan mencarikan hari baik untuk hajat besar. Tarot punya kartu harian, spread sampai Celtic Cross, dan bisa menjawab pertanyaanmu lewat OpenRouter, dengan bank jawaban sendiri kalau kuota AI habis. Aku juga mendesain ulang halaman depannya dengan astrolabe beranimasi, memasang batas kuota AI per perangkat dan per hari untuk Zodiak dan Tarot, dan sekalian membetulkan beberapa bug akurasi Zodiak serta satu celah XSS.",
         },
+        sita: {
+          title: "Sistem Informasi Tugas Akhir (SITA)",
+          summary: "Menyiapkan sistem tugas akhir dan akademik Prodi TI supaya jalan di Kubernetes, sebagai kontributor.",
+          detail: "SITA dipakai Prodi Teknik Informatika ITB Asia untuk mengurus tugas akhir, PKL, perwalian, dan jadwal kuliah. Aplikasinya dibangun dengan Node.js dan SQLite, dan ini bukan proyekku. Aku ikut sebagai kontributor untuk membuatnya jalan di Kubernetes. Aku menulis Dockerfile lengkap dengan healthcheck, lalu manifest dengan liveness dan readiness probe, persistent volume untuk datanya, dan init container yang membetulkan permission-nya. Belakangan aku memperketat image-nya dengan multi-stage build dan user non-root, menambahkan backup yang tersimpan permanen dan probe /up yang seragam dengan sistem kampus lain, serta menulis ulang workflow deploy supaya tidak lagi bergantung pada action pihak ketiga atau password sudo. Repositorinya privat, jadi yang ini tetap dirahasiakan.",
+        },
         campus: {
           title: "Platform Akademik Kampus",
           summary: "Sisi deployment sistem informasi ITB Asia, mulai dari menguji pipeline sebagai Server Support Specialist sampai membangunnya sebagai DevOps Engineer.",
-          detail: "ITB Asia menjalankan puluhan sistem informasi untuk mahasiswa, dosen, staf, dan orang tua, kebanyakan berupa API PHP dan Python dengan frontend React. Waktu masih jadi Server Support Specialist, bagianku menguji pipeline Cloud Build, mengecek update ter-deploy dengan benar di Google Cloud, dan membantu developer troubleshooting. Sekarang sebagai DevOps Engineer, aku membangun dan memperbaiki pipeline itu sendiri. Aku menyiapkan deployment lewat IAP, merapikan konfigurasi production, dan merawat server lokal yang menampung sistem milik lembaga kampus. Kodenya ada di server kampus, jadi yang ini tetap dirahasiakan.",
+          detail: "ITB Asia menjalankan puluhan sistem informasi untuk mahasiswa, dosen, staf, dan orang tua, kebanyakan berupa API PHP dan Python dengan frontend React. Waktu masih jadi Server Support Specialist, bagianku menguji pipeline Cloud Build, mengecek update ter-deploy dengan benar di Google Cloud, dan membantu developer troubleshooting. Sekarang sebagai DevOps Engineer, aku membangun dan memperbaiki pipeline itu sendiri. Aku menyiapkan deployment lewat IAP, merapikan konfigurasi production, dan merawat server lokal yang menampung sistem milik lembaga kampus. Beberapa sistem yang kudeploy di sana punya kontraknya sendiri di sini: SITA, Sistem Monitoring Publikasi, dan MEA. Kodenya ada di server kampus, jadi yang ini tetap dirahasiakan.",
         },
         ids: {
           title: "Deteksi Intrusi Hybrid CNN-LSTM",
@@ -514,7 +518,7 @@ export const strings = {
         mea: {
           title: "Madani Entrepreneurship Academy 2026",
           summary: "Upload file bertahap (chunked) serta deploy Docker dan Kubernetes otomatis, kutambahkan sebagai kontributor di platform Laravel akademi ini.",
-          detail: "Aplikasi Laravel MEA dipakai untuk pengumuman, galeri, modul, laporan, dan pengumpulan tugas peserta. Ini bukan proyekku. Aku ikut sebagai kontributor dan mengerjakan dua hal. Pertama, upload: file besar sekarang dikirim per potongan 12 MB, disatukan lagi di server, lalu lewat validasi yang sudah ada, jadi form-nya hampir tidak perlu diubah. Kedua, deployment: aku mengemas aplikasinya ke container, menulis manifest Kubernetes dengan health check dan penyimpanan persisten, dan menyiapkan pipeline GitHub Actions yang men-deploy dan menjalankan migrasi setiap ada push ke main.",
+          detail: "Aplikasi Laravel MEA dipakai untuk pengumuman, galeri, modul, laporan, dan pengumpulan tugas peserta. Ini bukan proyekku. Aku ikut sebagai kontributor dan mengerjakan dua hal. Pertama, upload: file besar sekarang dikirim per potongan 12 MB, disatukan lagi di server, lalu lewat validasi yang sudah ada, jadi form-nya hampir tidak perlu diubah. Kedua, deployment: aku mengemas aplikasinya ke container, menulis manifest Kubernetes dengan health check dan penyimpanan persisten, dan menyiapkan pipeline GitHub Actions yang men-deploy dan menjalankan migrasi setiap ada push ke main. Belakangan aku memperketat image-nya: Apache jalan tanpa root, base image dikunci versinya, dan PHP tidak bisa dijalankan dari folder storage. Workflow deploy-nya juga aku tulis ulang supaya tidak lagi butuh action pihak ketiga atau password sudo.",
         },
         games: {
           title: "Detectable Games on Discord",
@@ -524,17 +528,12 @@ export const strings = {
         simkampus: {
           title: "Sistem Monitoring Publikasi",
           summary: "Dashboard Django untuk memantau publikasi Google Scholar para dosen. Aku membantu menyiapkannya untuk production.",
-          detail: "Aplikasi ini mengambil profil dosen dari Google Scholar lalu menampilkan jumlah sitasi, h-index, dan leaderboard. Aku bukan pembuat aslinya. Bagianku adalah membuatnya siap jalan sebagai layanan sungguhan. Aku merapikan struktur proyek, membuang skrip eksperimen lama serta database dan file .env yang ikut masuk ke repo, memindahkan secret ke environment variable, dan mengganti SQLite ke MySQL. Setelah itu aku menambahkan WhiteNoise untuk static file dan menulis Dockerfile serta manifest Kubernetes-nya.",
+          detail: "Aplikasi ini mengambil profil dosen dari Google Scholar lalu menampilkan jumlah sitasi, h-index, dan leaderboard. Aku bukan pembuat aslinya. Bagianku adalah membuatnya siap jalan sebagai layanan sungguhan. Aku merapikan struktur proyek, membuang skrip eksperimen lama serta database dan file .env yang ikut masuk ke repo, memindahkan secret ke environment variable, dan mengganti SQLite ke MySQL. Setelah itu aku menambahkan WhiteNoise untuk static file dan menulis Dockerfile serta manifest Kubernetes-nya. Setelah itu aku menambahkan health check /up untuk probe Kubernetes, mengunci versi gunicorn, dan memperketat image-nya supaya jalan sebagai user non-root di Python 3.12 dengan root filesystem read-only.",
         },
         presence: {
           title: "Discord Presence for Games and YouTube",
           summary: "Dua skrip latar belakang yang menampilkan game yang sedang dimainkan, atau yang sedang diputar di YouTube dan YouTube Music, sebagai status Discord.",
           detail: "Dua skrip kecil untuk Windows yang jalan diam-diam di latar belakang. Skrip game mengecek judul jendela yang terbuka tiap 15 detik, lalu menampilkan game-nya di profil Discord lengkap dengan timer. Skrip YouTube membaca apa yang dilaporkan Windows sebagai sedang diputar, lalu menampilkan judul, artis, cover, dan progress bar untuk apa pun yang jalan di YouTube atau YouTube Music. Skrip ini ikut mengikuti pause, skip, dan geser durasi, berusaha diam saat iklan, dan mencari cover lewat YouTube Music, iTunes, dan YouTube.",
-        },
-        ar: {
-          title: "AR Berbasis Marker di Web",
-          summary: "Arahkan kamera ke marker cetak, lalu model 3D muncul langsung di browser.",
-          detail: "Eksperimen kecil untuk mata kuliah Augmented dan Virtual Reality, dibuat dengan AR.js, pattern marker buatan sendiri, dan model glTF. Tidak perlu instal apa-apa, semuanya jalan di browser.",
         },
         animus: {
           title: "Portofolio Animus",
