@@ -42,12 +42,12 @@ export function scramble(el, text, { duration = 900 } = {}) {
       let output = "";
       for (const slot of slots) {
         if (progress >= slot.end) {
-          output += slot.to;
+          output += slot.to || " ";
         } else if (progress >= slot.start) {
           if (Math.random() < 0.35) slot.glyph = randomGlyph();
           output += slot.to === " " ? " " : slot.glyph;
         } else {
-          output += slot.from;
+          output += slot.from || " ";
         }
       }
       el.textContent = output;

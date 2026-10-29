@@ -22,16 +22,6 @@ function markSynced() {
   } catch {}
 }
 
-function pageReady() {
-  const loaded =
-    document.readyState === "complete"
-      ? Promise.resolve()
-      : new Promise((resolve) => window.addEventListener("load", resolve, { once: true }));
-  const fonts = document.fonts?.ready ?? Promise.resolve();
-  const timeout = new Promise((resolve) => setTimeout(resolve, 8000));
-  return Promise.race([Promise.all([loaded, fonts]), timeout]);
-}
-
 function buildInsignia(svg) {
   return INSIGNIA_SHARDS.map((shard) => {
     const polygon = document.createElementNS(SVG_NS, "polygon");
@@ -105,7 +95,7 @@ export function runLoader() {
   const gsap = window.gsap;
   const reduced = prefersReducedMotion();
   const short = wasSynced();
-  const duration = short ? 700 : 2800;
+  const duration = short ? 700 : Math.max(600, 1200 - performance.now());
 
   const titleEl = loader.querySelector(".loader__title");
   const percentEl = loader.querySelector("[data-percent]");
@@ -140,11 +130,6 @@ export function runLoader() {
   root.classList.add("is-loading");
   setPageInert(true);
 
-  let ready = false;
-  pageReady().then(() => {
-    ready = true;
-  });
-
   if (gsap && !reduced) {
     if (short) {
       gsap.from(shards, { opacity: 0, scale: 0.6, duration: 0.4, stagger: 0.03, ease: "power2.out", onComplete: settle });
@@ -153,10 +138,10 @@ export function runLoader() {
         ...scatter(logo ? 320 : 260),
         scale: logo ? 1 : 0.3,
         opacity: 0,
-        duration: 1.4,
+        duration: 0.9,
         ease: "expo.out",
-        delay: 0.25,
-        stagger: { each: logo ? 0.07 : 0.09, from: "random" },
+        delay: 0.1,
+        stagger: { each: logo ? 0.04 : 0.05, from: "random" },
         onComplete: settle,
       });
     }
@@ -167,7 +152,6 @@ export function runLoader() {
   return new Promise((resolve) => {
     const statuses = t("loader.status");
     const startedAt = performance.now();
-    let shown = 0;
     let frameId = 0;
     let lastStatus = -1;
     let switchedTitle = false;
@@ -209,7 +193,7 @@ export function runLoader() {
       const radius = Math.hypot(window.innerWidth, window.innerHeight) / 2 + 60;
       gsap
         .timeline({ onComplete: hide })
-        .to({}, { duration: skipped ? 0.05 : 0.5 })
+        .to({}, { duration: skipped ? 0.05 : 0.2 })
         .to(flash, { opacity: 0.85, duration: 0.08, ease: "none" })
         .to(flash, { opacity: 0, duration: 0.6, ease: "power2.out" })
         .to(
@@ -225,7 +209,7 @@ export function runLoader() {
         )
         .to([readout, helixSvg], { opacity: 0, y: 16, duration: 0.4 }, "<")
         .add(resolve, "<0.15")
-        .to(loader, { "--hole": `${radius}px`, duration: 1.1, ease: "expo.inOut" }, "<");
+        .to(loader, { "--hole": `${radius}px`, duration: 0.8, ease: "expo.inOut" }, "<");
     };
 
     const onKey = (event) => {
@@ -233,15 +217,11 @@ export function runLoader() {
     };
 
     const tick = (now) => {
-      const elapsed = now - startedAt;
-      const cap = ready ? 100 : 92;
-      const target = Math.min(elapsed / duration, 1) * cap;
-      shown += (target - shown) * 0.12;
-      if (Math.abs(target - shown) < 0.4) shown = target;
-      const value = Math.floor(shown);
+      const progress = Math.min((now - startedAt) / duration, 1);
+      const value = Math.floor(progress * 100);
 
       percentEl.textContent = String(value).padStart(3, "0");
-      bar.style.setProperty("--progress", shown / 100);
+      bar.style.setProperty("--progress", progress);
 
       if (!switchedTitle && value >= 12) {
         switchedTitle = true;

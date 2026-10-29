@@ -11,7 +11,17 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
   background: var(--ink);
+}
+
+.js:not(.is-rendered) :is(.nav, .hero__content) {
+  visibility: hidden;
+}
+
+.js main > .section:not(.is-laid-out),
+.js .footer:not(.is-laid-out) {
+  display: none;
 }
 
 html.is-loading,

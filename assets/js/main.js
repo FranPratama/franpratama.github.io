@@ -10,6 +10,7 @@ import * as ui from "./ui.js";
 import { prefersReducedMotion } from "./scramble.js";
 
 const toTop = () => window.scrollTo({ top: 0, behavior: "instant" });
+const nextTask = () => new Promise((resolve) => setTimeout(resolve, 0));
 
 toTop();
 
@@ -18,6 +19,14 @@ initMusic();
 await Promise.all([resolveLogo(), resolveEagle()]);
 renderAll();
 applyTranslations();
+document.documentElement.classList.add("is-rendered");
+await nextTask();
+
+for (const block of document.querySelectorAll("main > .section, .footer")) {
+  block.classList.add("is-laid-out");
+  void block.offsetHeight;
+  await nextTask();
+}
 
 const motion = fx.enableMotion();
 const nav = ui.initNav();
@@ -33,8 +42,8 @@ fx.initEasterEgg();
 fx.initLeapButton();
 fx.initPortraitGlitch();
 fx.initSectionTracking(nav.setActive);
-const background = initBackground();
 fx.prepareHeroIntro(motion);
+await nextTask();
 
 await runLoader();
 
@@ -44,6 +53,7 @@ if (anchorTarget) {
   anchorTarget.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth" });
 }
 
+const background = initBackground();
 background?.startEagle();
 
 fx.playHeroIntro(motion);

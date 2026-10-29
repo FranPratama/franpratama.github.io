@@ -107,15 +107,15 @@ export function initGlyphs() {
     close();
   });
 
-  placeAll();
-  document.fonts?.ready.then(placeAll);
-  window.addEventListener("load", placeAll, { once: true });
+  let placed = false;
+  const placeOnReveal = () => {
+    if (placed || !root.classList.contains("eagle-vision")) return;
+    placed = true;
+    placeAll();
+  };
 
-  let resizeTimer = 0;
+  new MutationObserver(placeOnReveal).observe(root, { attributes: true, attributeFilter: ["class"] });
   window.addEventListener("resize", () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      if (!root.classList.contains("eagle-vision")) placeAll();
-    }, 300);
+    if (!root.classList.contains("eagle-vision")) placed = false;
   });
 }

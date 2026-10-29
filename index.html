@@ -41,10 +41,11 @@
   }
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Share+Tech+Mono&display=swap">
+  <link rel="preload" href="assets/fonts/share-tech-mono.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/cinzel.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/eb-garamond.woff2" as="font" type="font/woff2" crossorigin>
 
+  <link rel="stylesheet" href="assets/css/fonts.css">
   <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/loader.css">
@@ -59,6 +60,19 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
   <script src="assets/js/main.js" type="module"></script>
+  <link rel="modulepreload" href="assets/js/content.js">
+  <link rel="modulepreload" href="assets/js/svg.js">
+  <link rel="modulepreload" href="assets/js/scramble.js">
+  <link rel="modulepreload" href="assets/js/i18n.js">
+  <link rel="modulepreload" href="assets/js/render.js">
+  <link rel="modulepreload" href="assets/js/effects.js">
+  <link rel="modulepreload" href="assets/js/ui.js">
+  <link rel="modulepreload" href="assets/js/loader.js">
+  <link rel="modulepreload" href="assets/js/background.js">
+  <link rel="modulepreload" href="assets/js/eagle-vision.js">
+  <link rel="modulepreload" href="assets/js/glyphs.js">
+  <link rel="modulepreload" href="assets/js/music.js">
+  <link rel="preload" href="assets/img/eagle.svg" as="fetch" crossorigin>
 </head>
 <body>
   <svg class="svg-defs" aria-hidden="true" focusable="false">
@@ -123,8 +137,8 @@
       <div class="nav__tools">
         <button class="icon-btn music-btn" type="button" aria-pressed="false" data-i18n-attr="aria-label:ui.music;title:ui.music"></button>
         <button class="icon-btn eagle-btn" type="button" aria-pressed="false" data-icon="eye" data-i18n-attr="aria-label:ui.eagle;title:ui.eagle"></button>
-        <button class="lang-btn" type="button" data-i18n-attr="aria-label:ui.lang">
-          <span data-lang="en">EN</span><span aria-hidden="true">/</span><span data-lang="id">ID</span>
+        <button class="lang-btn" type="button" data-i18n-attr="title:ui.lang">
+          <span data-lang="en">EN</span><span aria-hidden="true">/</span><span data-lang="id">ID</span><span class="sr-only" data-i18n="ui.lang"></span>
         </button>
         <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu" data-i18n-attr="aria-label:ui.menu">
           <span></span><span></span>

@@ -51,6 +51,7 @@
 .loader__scan::after {
   content: "";
   position: absolute;
+  top: -120px;
   left: 0;
   right: 0;
   height: 120px;
@@ -59,8 +60,8 @@
 }
 
 @keyframes scan-sweep {
-  from { top: -120px; }
-  to { top: 100%; }
+  from { transform: translateY(0); }
+  to { transform: translateY(calc(100vh + 120px)); }
 }
 
 .loader__stage {
@@ -188,6 +189,10 @@
   text-transform: uppercase;
   color: var(--animus);
   transition: background 0.3s, color 0.3s;
+}
+
+.loader__skip:empty {
+  visibility: hidden;
 }
 
 .loader__skip:hover {

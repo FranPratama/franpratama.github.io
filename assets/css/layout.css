@@ -713,7 +713,7 @@
   font-size: 0.68rem;
   letter-spacing: 0.14em;
   color: var(--bone-dim);
-  opacity: 0.55;
+  opacity: 0.8;
   transition: opacity 0.3s;
 }
 

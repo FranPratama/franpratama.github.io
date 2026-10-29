@@ -11,6 +11,30 @@ function initParallax(hero, isVisible) {
   let targetY = 0;
   let x = 0;
   let y = 0;
+  let frameId = 0;
+
+  const loop = () => {
+    frameId = 0;
+    if (!isVisible()) return;
+    x += (targetX - x) * 0.06;
+    y += (targetY - y) * 0.06;
+    const settled = Math.abs(targetX - x) < 0.001 && Math.abs(targetY - y) < 0.001;
+    if (settled) {
+      x = targetX;
+      y = targetY;
+    }
+    const scroll = window.scrollY;
+    for (const layer of layers) {
+      const depth = Number(layer.dataset.depth);
+      const sway = Number(layer.dataset.sway || 0);
+      layer.style.transform = `translate3d(${-x * sway}px, ${scroll * depth - y * sway * 0.3}px, 0)`;
+    }
+    if (!settled) request();
+  };
+
+  const request = () => {
+    if (!frameId) frameId = requestAnimationFrame(loop);
+  };
 
   if (finePointer) {
     hero.addEventListener(
@@ -18,25 +42,14 @@ function initParallax(hero, isVisible) {
       (event) => {
         targetX = event.clientX / window.innerWidth - 0.5;
         targetY = event.clientY / window.innerHeight - 0.5;
+        request();
       },
       { passive: true },
     );
   }
 
-  const loop = () => {
-    if (isVisible()) {
-      x += (targetX - x) * 0.06;
-      y += (targetY - y) * 0.06;
-      const scroll = window.scrollY;
-      for (const layer of layers) {
-        const depth = Number(layer.dataset.depth);
-        const sway = Number(layer.dataset.sway || 0);
-        layer.style.transform = `translate3d(${-x * sway}px, ${scroll * depth - y * sway * 0.3}px, 0)`;
-      }
-    }
-    requestAnimationFrame(loop);
-  };
-  requestAnimationFrame(loop);
+  window.addEventListener("scroll", request, { passive: true });
+  request();
 }
 
 function initDust(canvas, isVisible) {
